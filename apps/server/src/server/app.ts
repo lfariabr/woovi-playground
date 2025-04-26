@@ -31,7 +31,13 @@ routes.all(
 	'/graphql',
 	graphqlHTTP(() => ({
 		schema,
-		graphiql: true,
+		graphiql: {
+			subscriptionEndpoint: 'ws://localhost:4000/graphql/ws',
+			subscriptionsProtocol: 'WS', // Use 'SSE' for Server-Sent Events
+			websocketConnectionParams: {
+				protocol: 'graphql-ws'
+			}
+		},
 		context: getContext(),
 	}))
 );
