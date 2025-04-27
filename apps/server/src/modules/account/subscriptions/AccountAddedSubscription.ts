@@ -7,7 +7,7 @@ import { redisPubSub } from '../../pubSub/redisPubSub';
 import { PUB_SUB_EVENTS } from '../../pubSub/pubSubEvents';
 
 type AccountAddedPayload = {
-	account: string;
+	accountNumber: string;
 };
 
 const subscription = subscriptionWithClientId({
@@ -16,7 +16,7 @@ const subscription = subscriptionWithClientId({
 		() => redisPubSub.asyncIterator(PUB_SUB_EVENTS.ACCOUNT.ADDED),
 		async (payload: AccountAddedPayload, context) => {
 			const account = await Account.findOne({
-				_id: payload.account,
+				accountNumber: payload.accountNumber,
 			});
 
 			if (!account) {
@@ -27,10 +27,10 @@ const subscription = subscriptionWithClientId({
 		}
 	),
 	getPayload: async (obj: AccountAddedPayload) => ({
-		account: obj?.account,
+		accountNumber: obj?.accountNumber,
 	}),
 	outputFields: {
-		...accountField('account'),
+		...accountField('accountNumber'),
 	},
 });
 

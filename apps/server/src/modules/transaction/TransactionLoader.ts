@@ -1,16 +1,16 @@
 import { createLoader } from '@entria/graphql-mongo-helpers';
 import { registerLoader } from '../loader/loaderRegister';
-import { Account } from './AccountModel';
+import { Transaction } from './TransactionModel';
 
 const { Wrapper, getLoader, clearCache, load, loadAll } = createLoader({
-	model: Account,
-	loaderName: 'AccountLoader',
+	model: Transaction,
+	loaderName: 'TransactionLoader',
 });
 
-registerLoader('AccountLoader', getLoader);
+registerLoader('TransactionLoader', getLoader);
 
-export const AccountLoader = {
-	Account: Wrapper,
+export const TransactionLoader = {
+	Transaction: Wrapper,
 	getLoader,
 	clearCache,
 	load,

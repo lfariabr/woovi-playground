@@ -1,21 +1,35 @@
 import type { Document, Model } from 'mongoose';
 import mongoose from 'mongoose';
 
-export type IAccount = {
-  name: string;
-  balance: number;
-  createdAt: Date;
-  updatedAt: Date;
-} & Document;
-
-const AccountSchema = new mongoose.Schema<IAccount>(
-  {
-    name: { type: String, required: true },
-    balance: { type: Number, required: true, default: 0 },
-  },
-  { timestamps: true }
+const Schema = new mongoose.Schema<IAccount>(
+	{
+		accountNumber: {
+			type: String,
+			description: 'The account number',
+		},
+		balance: {
+			type: Number,
+			description: 'The balance of the account',
+		},
+		userTaxId: {
+			type: String,
+			ref: 'User',
+			unique: true,
+			required: true,
+		},
+	},
+	{
+		collection: 'Account',
+		timestamps: true,
+	}
 );
 
-// Prevent OverwriteModelError in dev/watch mode
-export const Account: Model<IAccount> =
-  mongoose.models.Account || mongoose.model<IAccount>('Account', AccountSchema);
+export type IAccount = {
+	accountNumber: string;
+	balance: number;
+	userTaxId: string;
+	createdAt: Date;
+	updatedAt: Date;
+} & Document;
+
+export const Account: Model<IAccount> = mongoose.model('Account', Schema);

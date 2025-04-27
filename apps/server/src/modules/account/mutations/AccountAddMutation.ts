@@ -8,24 +8,29 @@ import { Account } from '../AccountModel';
 import { accountField } from '../accountFields';
 
 export type AccountAddInput = {
-	name: string;
+	accountNumber: string;
 	balance: number;
+	userTaxId: string;
 };
 
 const mutation = mutationWithClientMutationId({
 	name: 'AccountAdd',
 	inputFields: {
-		name: {
+		accountNumber: {
 			type: new GraphQLNonNull(GraphQLString),
 		},
 		balance: {
 			type: new GraphQLNonNull(GraphQLFloat),
 		},
+		userTaxId: {
+			type: new GraphQLNonNull(GraphQLString),
+		},
 	},
 	mutateAndGetPayload: async (args: AccountAddInput) => {
 		const account = await new Account({
-			name: args.name,
+			accountNumber: args.accountNumber,
 			balance: args.balance,
+			userTaxId: args.userTaxId,
 		}).save();
 
 		console.log('MUTATION publishing:', { account: account._id.toString() });

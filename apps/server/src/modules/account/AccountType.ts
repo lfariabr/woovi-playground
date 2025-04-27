@@ -12,17 +12,25 @@ const AccountType = new GraphQLObjectType<IAccount>({
 	description: 'Represents an account',
 	fields: () => ({
 		id: globalIdField('Account'),
-		name: {
+		accountNumber: {
 			type: GraphQLString,
-			resolve: (account) => account.name,
+			resolve: (account) => account.accountNumber,
 		},
 		balance: {
 			type: GraphQLString,
 			resolve: (account) => account.balance,
 		},
+		userTaxId: {
+			type: GraphQLString,
+			resolve: (account) => account.userTaxId,
+		},
 		createdAt: {
 			type: GraphQLString,
 			resolve: (account) => account.createdAt.toISOString(),
+		},
+		updatedAt: {
+			type: GraphQLString,
+			resolve: (account) => account.updatedAt.toISOString(),
 		},
 	}),
 	interfaces: () => [nodeInterface],

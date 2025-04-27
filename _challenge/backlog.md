@@ -34,27 +34,20 @@ ws.onmessage = (msg) => console.log('WebSocket message:', msg.data);
 
 ## Em andamento
 
+### Replicar para **Transaction**:
 
----
+- [x] `TransactionModel.ts`
+- [x] `TransactionType.ts`
+- [x] `TransactionLoader.ts` (opcional)
+- [x] `transactionFields.ts`
+- [x] `transactionMutations.ts`
+- [x] `TransactionAddedSubscription.ts` (opcional)
 
 ## Próximas tarefas
 
-### Replicar para **Transaction**:
-
-- [ ] `TransactionModel.ts`
-- [ ] `TransactionType.ts`
-- [ ] `TransactionLoader.ts` (opcional)
-- [ ] `transactionFields.ts`
-- [ ] `transactionMutations.ts`
-- [ ] `TransactionAddedSubscription.ts` (opcional)
 - [ ] Implementar Relay-style pagination
 - [ ] Relacionar Transações ao `accountId` (referência)
-
-- [ ] Transaction model & schema
 - [ ] (Optional) Transaction data-loader
-- [ ] Transaction fields & mutations
-- [ ] Transaction subscription (publish in mutation → TransactionAdded)
-- [ ] Wire it into your SubscriptionType
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
 ---
