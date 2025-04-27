@@ -1,4 +1,4 @@
-import { TransactionType, transactionConnection } from './TransactionType';
+import { TransactionType, TransactionConnection } from './TransactionType';
 import { TransactionLoader } from './TransactionLoader';
 import { connectionArgs } from 'graphql-relay';
 
@@ -12,7 +12,7 @@ export const transactionField = (key: string) => ({
 
 export const transactionConnectionField = (key: string) => ({
 	[key]: {
-		type: transactionConnection.connectionType,
+		type: TransactionConnection,
 		args: {
 			...connectionArgs,
 		},

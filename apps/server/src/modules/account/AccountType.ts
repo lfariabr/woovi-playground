@@ -1,11 +1,17 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
-import { globalIdField, connectionDefinitions } from 'graphql-relay';
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
+import { globalIdField, connectionDefinitions, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
 import type { ConnectionArguments } from 'graphql-relay';
 
 import { IAccount } from './AccountModel';
 import { nodeInterface } from '../node/typeRegister';
 import { registerTypeLoader } from '../node/typeRegister';
 import { AccountLoader } from './AccountLoader';
+import { TransactionLoader } from '../transaction/TransactionLoader';
+import { TransactionType } from '../transaction/TransactionType';
+import { Transaction } from '../transaction/TransactionModel';
+import { TransactionConnection } from '../transaction/TransactionType';
+
+// Add a transactions connection field that returns all transactions where the account is either sender or receiver
 
 const AccountType = new GraphQLObjectType<IAccount>({
 	name: 'Account',
@@ -32,6 +38,21 @@ const AccountType = new GraphQLObjectType<IAccount>({
 			type: GraphQLString,
 			resolve: (account) => account.updatedAt.toISOString(),
 		},
+		transactions: {
+			type: TransactionConnection,
+			args: connectionArgs,
+			resolve: (account, args) => {
+				return connectionFromPromisedArray(
+					Transaction.find({
+						$or: [
+							{ senderAccountId: account._id },
+							{ receiverAccountId: account._id },
+						],
+					}).sort({ createdAt: -1 }),
+					args
+				);
+			},
+		},
 	}),
 	interfaces: () => [nodeInterface],
 });
@@ -41,6 +62,6 @@ const accountConnection = connectionDefinitions({
 	nodeType: AccountType,
 });
 
-registerTypeLoader(AccountType, AccountLoader.load);
+registerTypeLoader(AccountType, AccountLoader.load, TransactionLoader.loadMany);
 
 export { AccountType, accountConnection };

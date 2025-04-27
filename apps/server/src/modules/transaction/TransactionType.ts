@@ -42,11 +42,11 @@ const TransactionType = new GraphQLObjectType<ITransaction>({
 	interfaces: () => [nodeInterface],
 });
 
-const transactionConnection = connectionDefinitions({
+const { connectionType: TransactionConnection } = connectionDefinitions({
 	name: 'Transaction',
 	nodeType: TransactionType,
 });
 
 registerTypeLoader(TransactionType, TransactionLoader.load);
 
-export { TransactionType, transactionConnection };
+export { TransactionType, TransactionConnection };

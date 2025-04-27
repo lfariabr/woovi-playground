@@ -32,17 +32,39 @@
   ws.onmessage = (msg) => console.log('WebSocket message:', msg.data);
   ```
 ### tag v1.2.0
-- [x] `TransactionModel.ts`
-- [x] `TransactionType.ts`
-- [x] `TransactionLoader.ts` (opcional)
-- [x] `transactionFields.ts`
-- [x] `transactionMutations.ts`
-- [x] `TransactionAddedSubscription.ts` (opcional)
-- [x] Criar tag `v1.2.0` da entrega inicial
+- [x] `TransactionModel.ts`/ `TransactionType.ts`/ `TransactionLoader.ts` (opcional)/ `transactionFields.ts`/ `transactionMutations.ts`/ `TransactionAddedSubscription.ts` (opcional)
+- [x] Criar tag `v1.2.0` da entrega
 
 ### tag v1.3.0
-- [X] Criar `techstack.md`[_challenge/techstack.md](https://github.com/lfariabr/woovi-playground/tree/main/_challenge/techstack.md)
-- [X] Atualizar backlog com as atualizações dos últimos 2 dias
+- [x] Criar `techstack.md`[_challenge/techstack.md](https://github.com/lfariabr/woovi-playground/tree/main/_challenge/techstack.md)
+- [x] Atualizar backlog com as atualizações dos últimos 2 dias
+
+### tag v1.4.0
+- [x] Criar constant chamada TransactionConnection em `TransactionType.ts` (Relay para conexão das transações)
+- [x] Reutilizar a conexão em outro módulo em `TransactionFields.ts` expondo a lista de transações
+- [x] Linkar a conexão do TransactionType em `AccountType.ts`, adicionando o campo 'transactions' em AccounType
+```GraphiQL teste
+query {
+  accounts(last: 5) {
+    edges {
+      node {
+        id
+        accountNumber
+        transactions(first: 5) {
+          edges {
+            node {
+              value
+              sender { accountNumber }
+              receiver { accountNumber }
+              createdAt
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ---
 
@@ -50,7 +72,7 @@
 
 ## Next Tasks
 
-- [ ] Relacionar Transações ao `accountId` (referência)
+- [x] Relacionar Transações ao `accountId` (referência)
 - [ ] (Optional) Transaction data-loader
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
@@ -63,14 +85,14 @@
   - [x] Subtrair `amount` da conta de origem
   - [x] Somar `amount` na conta de destino
   - [x] Validar saldo insuficiente na origem antes de completar a transação
-  - [ ] Criar registro de transação
+  - [x] Criar registro de transação
 
 ---
 
 ## Extras e Melhorias (opcionais)
 
-- [X] Criação de Release no GitHub com changelog
-- [ ] Subscription para Transaction adicionada
+- [x] Criação de Release no GitHub com changelog
+- [x] Subscription para Transaction adicionada
 - [ ] Testes unitários com Jest
 - [ ] Dockerfile + docker-compose.yml para ambiente local
 - [ ] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
