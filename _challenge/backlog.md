@@ -94,12 +94,26 @@ query {
 console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 ```
 
+### tag v1.6.0
+- [x] Ajustado o fluxo de Transactions para ser dinâmico. A versão anterior estava hardcoded no `TransactionFields.ts`
+- [x] Criado `TransactionController` com a lógica de adicionar/remover transações
+- [x] Importado Zod para validação de dados no `Controller`
+- [x] Implementada verificação de idempotencyKey para garantir operações únicas
+- [x] Tratada race condition no MongoDB usando `inc` para garantir a consistência do saldo
+- [x] Adicionado error handling estruturado para falhas de banco de dados (logging aprimorado)
+- [x] Bloqueio de auto-transferência: remetente e destinatário precisam ser contas diferentes
+- [x] Adicionada validação de entrada com erros GraphQL claros (input inválido, conta não encontrada, saldo insuficiente, idempotencyKey duplicada, etc.)
+- [x] Log estruturado para todos os eventos críticos e erros de transações
+- [x] Implementado fallback seguro para erro de chave duplicada no MongoDB (idempotency race condition)
+- [x] Melhorada a modularidade e a manutenibilidade do código para facilitar futuras integrações e novas funcionalidades
+- [x] Documentação e backlog atualizados para refletir o novo fluxo de transações
+
 ---
 
 ## In Progress
 
-
 ## Next Tasks
+- [ ] Testes unitários com Jest
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
 ---

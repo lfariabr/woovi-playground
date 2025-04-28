@@ -6,25 +6,23 @@ import { ITransaction } from './TransactionModel';
 import { nodeInterface } from '../node/typeRegister';
 import { registerTypeLoader } from '../node/typeRegister';
 import { TransactionLoader } from './TransactionLoader';
-import { AccountType } from '../account/AccountType';
-import { Account } from '../account/AccountModel';
 
 const TransactionType = new GraphQLObjectType<ITransaction>({
 	name: 'Transaction',
 	description: 'Represents a transaction',
 	fields: () => ({
 		id: globalIdField('Transaction'),
-		sender: {
-			type: new GraphQLNonNull(AccountType),
-			resolve: async ({ senderAccountId }) => {
-				return Account.findById(senderAccountId);
-			},
+		senderAccountId: {
+			type: GraphQLString,
+			resolve: (tx) => tx.senderAccountId ? tx.senderAccountId.toString() : null,
 		},
-		receiver: {
-			type: new GraphQLNonNull(AccountType),
-			resolve: async ({ receiverAccountId }) => {
-				return Account.findById(receiverAccountId);
-			},
+		receiverAccountId: {
+			type: GraphQLString,
+			resolve: (tx) => tx.receiverAccountId ? tx.receiverAccountId.toString() : null,
+		},
+		idempotencyKey: {
+			type: GraphQLString,
+			resolve: (tx) => tx.idempotentKey,
 		},
 		value: {
 			type: new GraphQLNonNull(GraphQLString),
