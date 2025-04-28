@@ -43,6 +43,7 @@
 - [x] Criar constant chamada TransactionConnection em `TransactionType.ts` (Relay para conexão das transações)
 - [x] Reutilizar a conexão em outro módulo em `TransactionFields.ts` expondo a lista de transações
 - [x] Linkar a conexão do TransactionType em `AccountType.ts`, adicionando o campo 'transactions' em AccounType
+- [x] Relacionar Transações ao `accountId` (referência)
 ```GraphiQL teste
 query {
   accounts(last: 5) {
@@ -66,14 +67,39 @@ query {
 }
 ```
 
+### tag v1.5.0
+- [x] (Optional) Transaction data-loader
+```GraphiQL test Data Loader implementation
+query {
+  accounts(first: 5) {
+    edges {
+      node {
+        id
+        accountNumber
+        transactions(first: 5) {
+          edges {
+            node {
+              value
+              createdAt
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+- [x] Validated data-loader implementation by putting a console log comment @ `TransactionLoader.ts` `batchTransactionsByAccountIds`
+```console log message used to validate implementation
+console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
+```
+
 ---
 
 ## In Progress
 
-## Next Tasks
 
-- [x] Relacionar Transações ao `accountId` (referência)
-- [ ] (Optional) Transaction data-loader
+## Next Tasks
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
 ---

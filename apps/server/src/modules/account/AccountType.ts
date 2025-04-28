@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-import { globalIdField, connectionDefinitions, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
+import { globalIdField, connectionDefinitions, connectionArgs, connectionFromArray } from 'graphql-relay';
 import type { ConnectionArguments } from 'graphql-relay';
 
 import { IAccount } from './AccountModel';
@@ -41,16 +41,9 @@ const AccountType = new GraphQLObjectType<IAccount>({
 		transactions: {
 			type: TransactionConnection,
 			args: connectionArgs,
-			resolve: (account, args) => {
-				return connectionFromPromisedArray(
-					Transaction.find({
-						$or: [
-							{ senderAccountId: account._id },
-							{ receiverAccountId: account._id },
-						],
-					}).sort({ createdAt: -1 }),
-					args
-				);
+			resolve: async (account, args, context) => {
+				const transactions = await context.transactionsByAccountIdLoader.load(account._id.toString());
+				return connectionFromArray(transactions, args);
 			},
 		},
 	}),
