@@ -1,20 +1,21 @@
 const pack = require('./package.json');
 
+// Updated jestTransformer to ensure .ts/.tsx files are ALWAYS handled by ts-jest, and .js/.jsx by Babel or custom transformer.
 const jestTransformer = () => {
   if (process.env.JEST_TRANSFORMER === 'babel-barrel') {
     // eslint-disable-next-line
     console.log('babel-barrel');
-
     return {
-      '^.+\\.(js|ts|tsx)?$': require.resolve('./babelBarrel'),
-    }
+      '^.+\\.(ts|tsx)$': 'ts-jest', // Always use ts-jest for TypeScript
+      '^.+\\.(js|jsx)$': require.resolve('./babelBarrel'), // JS/JSX handled by custom transformer
+    };
   }
 
   // eslint-disable-next-line
   console.log('babel-jest');
-
   return {
-    '^.+\\.(js|ts|tsx)?$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',    // Always use ts-jest for TypeScript
+    '^.+\\.(js|jsx)$': 'babel-jest', // Use babel-jest for JS/JSX
   };
 };
 

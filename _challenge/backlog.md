@@ -108,12 +108,21 @@ console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 - [x] Melhorada a modularidade e a manutenibilidade do código para facilitar futuras integrações e novas funcionalidades
 - [x] Documentação e backlog atualizados para refletir o novo fluxo de transações
 
+### tag v1.7.0
+- [x] Criado e expandido o conjunto de testes unitários com Jest para Accounts e Transactions
+- [x] Adicionados testes de mutation e query 
+- [x] Os testes cobrem: Criação de registros, Validações de entrada, Execução de mutations, Consulta de dados (queries)
+- [x] Adicionado tsconfig.server.json para compatibilidade do ts com ts-jest
+- [x] Reestruturada a organização da pasta de testes
+- [x] Atualizados package.json, jest.config.js e configurações relacionadas
+
 ---
 
 ## In Progress
 
 ## Next Tasks
-- [ ] Testes unitários com Jest
+
+- [ ] Conferir se o refactor do Transaction não quebrou o subscription
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
 ---
@@ -133,7 +142,7 @@ console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 
 - [x] Criação de Release no GitHub com changelog
 - [x] Subscription para Transaction adicionada
-- [ ] Testes unitários com Jest
+- [x] Testes unitários com Jest
 - [ ] Dockerfile + docker-compose.yml para ambiente local
 - [ ] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
 - [ ] Arquivo `.graphql` ou `.http` com queries de exemplo

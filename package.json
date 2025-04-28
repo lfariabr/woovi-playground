@@ -15,14 +15,22 @@
 	"devDependencies": {
 		"@babel/preset-env": "^7.23.8",
 		"@babel/preset-typescript": "^7.23.3",
+		"@types/jest": "^29.5.14",
+		"@types/mongodb-memory-server": "^1.8.0",
+		"@types/mongoose": "^5.11.96",
 		"@woovi-playground/eslint-config-custom": "*",
 		"autoprefixer": "^10.4.16",
 		"babel-plugin-transform-barrels": "^1.0.10",
 		"eslint": "^8.53.0",
 		"jest": "^29.7.0",
 		"jest-junit": "^16.0.0",
+		"mongodb-memory-server": "^10.1.4",
 		"prettier": "^3.1.0",
+		"ts-jest": "^29.3.2",
 		"turbo": "latest"
 	},
-	"packageManager": "pnpm@10.0.0"
+	"packageManager": "pnpm@10.0.0",
+	"dependencies": {
+		"mongoose": "^8.14.0"
+	}
 }

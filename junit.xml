@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.37">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-01-23T11:52:07" time="0.342" tests="1">
-    <testcase classname=" basic" name=" basic" time="0.001">
+<testsuites name="jest tests" tests="12" failures="0" errors="0" time="6.302">
+  <testsuite name="AccountModel" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.728" tests="3">
+    <testcase classname="AccountModel should create and retrieve an account" name="AccountModel should create and retrieve an account" time="0.016">
+    </testcase>
+    <testcase classname="AccountModel should not create an account with duplicate userTaxId" name="AccountModel should not create an account with duplicate userTaxId" time="0.012">
+    </testcase>
+    <testcase classname="AccountModel should not create an account with duplicate accountNumber" name="AccountModel should not create an account with duplicate accountNumber" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="AccountMutation" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.78" tests="1">
+    <testcase classname="AccountMutation should update account balance" name="AccountMutation should update account balance" time="0.013">
+    </testcase>
+  </testsuite>
+  <testsuite name="AccountQuery" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.807" tests="1">
+    <testcase classname="AccountQuery should find account by accountNumber" name="AccountQuery should find account by accountNumber" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="TransactionQuery" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.834" tests="1">
+    <testcase classname="TransactionQuery should find transaction by idempotentKey" name="TransactionQuery should find transaction by idempotentKey" time="0.016">
+    </testcase>
+  </testsuite>
+  <testsuite name="TransactionModel" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.828" tests="2">
+    <testcase classname="TransactionModel should require all mandatory fields" name="TransactionModel should require all mandatory fields" time="0.008">
+    </testcase>
+    <testcase classname="TransactionModel should not allow non-numeric value" name="TransactionModel should not allow non-numeric value" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="TransactionMutation" errors="0" failures="0" skipped="0" timestamp="2025-04-28T20:56:34" time="5.85" tests="4">
+    <testcase classname="TransactionMutation should not create a transaction if account sender has no balance" name="TransactionMutation should not create a transaction if account sender has no balance" time="0.016">
+    </testcase>
+    <testcase classname="TransactionMutation should not create a transaction with duplicate idempotentKey" name="TransactionMutation should not create a transaction with duplicate idempotentKey" time="0.016">
+    </testcase>
+    <testcase classname="TransactionMutation should not create a transaction with duplicate receiverAccountId" name="TransactionMutation should not create a transaction with duplicate receiverAccountId" time="0.006">
+    </testcase>
+    <testcase classname="TransactionMutation should not create a transaction with duplicate senderAccountId" name="TransactionMutation should not create a transaction with duplicate senderAccountId" time="0.004">
     </testcase>
   </testsuite>
 </testsuites>

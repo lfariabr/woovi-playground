@@ -6,6 +6,8 @@ const Schema = new mongoose.Schema<IAccount>(
 		accountNumber: {
 			type: String,
 			description: 'The account number',
+			unique: true,
+			required: true,
 		},
 		balance: {
 			type: Number,
