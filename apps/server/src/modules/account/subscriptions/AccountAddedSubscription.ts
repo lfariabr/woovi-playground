@@ -1,7 +1,8 @@
 import { subscriptionWithClientId } from 'graphql-relay-subscription';
 import { withFilter } from 'graphql-subscriptions';
+import { GraphQLString } from 'graphql';
 
-import { accountField } from '../accountFields';
+import { accountField, AccountType } from '../accountFields';
 import { Account } from '../AccountModel';
 import { redisPubSub } from '../../pubSub/redisPubSub';
 import { PUB_SUB_EVENTS } from '../../pubSub/pubSubEvents';
@@ -15,6 +16,7 @@ const subscription = subscriptionWithClientId({
 	subscribe: withFilter(
 		() => redisPubSub.asyncIterator(PUB_SUB_EVENTS.ACCOUNT.ADDED),
 		async (payload: AccountAddedPayload, context) => {
+			console.log('AccountAdded subscription filter called with:', payload);
 			const account = await Account.findOne({
 				accountNumber: payload.accountNumber,
 			});
@@ -30,7 +32,16 @@ const subscription = subscriptionWithClientId({
 		accountNumber: obj?.accountNumber,
 	}),
 	outputFields: {
-		...accountField('accountNumber'),
+		account: {
+			type: AccountType,
+			resolve: async (payload: AccountAddedPayload) => {
+				return Account.findOne({ accountNumber: payload.accountNumber });
+			},
+		},
+		accountNumber: {
+			type: GraphQLString,
+			resolve: (payload: AccountAddedPayload) => payload.accountNumber,
+		},
 	},
 });
 

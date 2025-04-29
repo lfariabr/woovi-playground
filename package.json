@@ -31,6 +31,7 @@
 	},
 	"packageManager": "pnpm@10.0.0",
 	"dependencies": {
+		"graphql-ws": "^5.14.2",
 		"mongoose": "^8.14.0"
 	}
 }

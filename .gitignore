@@ -34,3 +34,6 @@ npm-debug.log*
 .vercel
 
 **/__generated__/*.ts
+
+# windsurf rules
+.windsurfrules

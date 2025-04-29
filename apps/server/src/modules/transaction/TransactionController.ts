@@ -3,6 +3,9 @@ import { z } from 'zod'
 import { Transaction } from './TransactionModel'
 import { GraphQLError } from 'graphql'
 import { Account } from '../account/AccountModel'
+import { fromGlobalId } from 'graphql-relay';
+import { redisPubSub } from '../pubSub/redisPubSub';
+import { PUB_SUB_EVENTS } from '../pubSub/pubSubEvents';
 
 const transferFundsSchema = z.object({
   amount: z.number().int().positive(),
@@ -10,6 +13,24 @@ const transferFundsSchema = z.object({
   receiverAccountId: z.string(),
   idempotencyKey: z.string(),
 });
+
+async function resolveAccountId(accountIdOrNumber: string) {
+  // Try ObjectId
+  if (/^[a-f\d]{24}$/i.test(accountIdOrNumber)) {
+    return accountIdOrNumber;
+  }
+  // Try Relay globalId
+  try {
+    const { type, id } = fromGlobalId(accountIdOrNumber);
+    if (type === 'Account' && /^[a-f\d]{24}$/i.test(id)) {
+      return id;
+    }
+  } catch {}
+  // Fallback: treat as accountNumber
+  const account = await Account.findOne({ accountNumber: accountIdOrNumber });
+  if (!account) throw new GraphQLError(`Account with number or id '${accountIdOrNumber}' not found`);
+  return account._id.toString();
+}
 
 export async function transferTypeValidator(args: z.infer<typeof transferFundsSchema>) {
   try {
@@ -27,51 +48,55 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
 
     const { amount, senderAccountId, receiverAccountId, idempotencyKey } = parsed.data;
 
+    // Accept accountNumber, globalId, or ObjectId for sender/receiver
+    const resolvedSenderAccountId = await resolveAccountId(senderAccountId);
+    const resolvedReceiverAccountId = await resolveAccountId(receiverAccountId);
+
     // Preventing sender and receiver from being the same account
-    if (senderAccountId === receiverAccountId) {
-      console.warn(`[Transaction] Sender and receiver are the same account: ${senderAccountId}`);
+    if (resolvedSenderAccountId === resolvedReceiverAccountId) {
+      console.warn(`[Transaction] Sender and receiver are the same account: ${resolvedSenderAccountId}`);
       throw new GraphQLError('Sender and receiver accounts must be different.');
     }
 
     // Fetching accounts
-    const sender = await Account.findById(senderAccountId);
-    const receiver = await Account.findById(receiverAccountId);
+    const sender = await Account.findById(resolvedSenderAccountId);
+    const receiver = await Account.findById(resolvedReceiverAccountId);
     if (!sender) {
-      console.error(`[Transaction] Sender account not found: ${senderAccountId}`);
+      console.error(`[Transaction] Sender account not found: ${resolvedSenderAccountId}`);
       throw new GraphQLError('Sender account not found');
     }
     if (!receiver) {
-      console.error(`[Transaction] Receiver account not found: ${receiverAccountId}`);
+      console.error(`[Transaction] Receiver account not found: ${resolvedReceiverAccountId}`);
       throw new GraphQLError('Receiver account not found');
     }
 
     // Idempotency enforcement to check for existing transaction by sender + idempotentKey
     const existingTx = await Transaction.findOne({
-      senderAccountId,
+      senderAccountId: resolvedSenderAccountId,
       idempotentKey: idempotencyKey,
     });
     if (existingTx) {
-      console.warn(`[Transaction] Duplicate idempotencyKey for sender: ${senderAccountId}, key: ${idempotencyKey}`);
+      console.warn(`[Transaction] Duplicate idempotencyKey for sender: ${resolvedSenderAccountId}, key: ${idempotencyKey}`);
       throw new GraphQLError('Duplicate idempotencyKey: a transaction with this key already exists for this sender.');
     }
 
     // Atomic balance update for race condition/concurrency safety
     const senderUpdate = await Account.findOneAndUpdate(
       {
-        _id: senderAccountId,
+        _id: resolvedSenderAccountId,
         balance: { $gte: amount },
       },
       { $inc: { balance: -amount } },
       { new: true }
     );
     if (!senderUpdate) {
-      console.warn(`[Transaction] Insufficient funds for sender: ${senderAccountId}, attempted: ${amount}`);
+      console.warn(`[Transaction] Insufficient funds for sender: ${resolvedSenderAccountId}, attempted: ${amount}`);
       throw new GraphQLError('Insufficient funds (atomic check failed)');
     }
 
     // Credit receiver atomically (no balance check needed)
     await Account.findByIdAndUpdate(
-      receiverAccountId,
+      resolvedReceiverAccountId,
       { $inc: { balance: amount } },
       { new: true }
     );
@@ -80,8 +105,8 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
     let transaction;
     try {
       transaction = await Transaction.create({
-        senderAccountId,
-        receiverAccountId,
+        senderAccountId: resolvedSenderAccountId,
+        receiverAccountId: resolvedReceiverAccountId,
         value: amount,
         idempotentKey: idempotencyKey,
       });
@@ -94,18 +119,23 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
       console.error('[Transaction] DB error:', err);
       throw new GraphQLError('Transaction creation failed due to a database error.');
     }
-
-    console.info('[Transaction] Created transaction:', {
-      senderAccountId,
-      receiverAccountId,
-      value: amount,
-      idempotentKey: idempotencyKey,
-      transactionId: transaction._id,
-    });
+    // Debugging...
+    // console.info('[Transaction] Created transaction:', {
+    //   senderAccountId: resolvedSenderAccountId,
+    //   receiverAccountId: resolvedReceiverAccountId,
+    //   value: amount,
+    //   idempotentKey: idempotencyKey,
+    //   transactionId: transaction._id,
+    // });
 
     if (!transaction) {
       throw new GraphQLError('Transaction creation failed');
     }
+
+    // Publish subscription event for TransactionAdded
+    await redisPubSub.publish(PUB_SUB_EVENTS.TRANSACTION.ADDED, {
+      transaction: transaction._id,
+    });
 
     return { transaction: transaction._id };
   } catch (err: any) {

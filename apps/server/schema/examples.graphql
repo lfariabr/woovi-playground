@@ -58,6 +58,16 @@ query {
   }
 }
 
+# Fetch a single account by accountNumber
+query {
+  account(id: "999") { # accountNumber can be used directly
+    id
+    accountNumber
+    balance
+    userTaxId
+  }
+}
+
 # List transactions
 query {
   transactions(first: 5) {
@@ -122,6 +132,25 @@ mutation {
     transaction {
       id
       value
+    }
+    clientMutationId
+  }
+}
+
+# Example: Create a transaction using accountNumber for sender/receiver
+mutation {
+  createTransaction(input: {
+    value: 500
+    senderAccountId: "999" # accountNumber can be used directly
+    receiverAccountId: "444" # accountNumber can be used directly
+    idempotencyKey: "unique-key-002"
+    clientMutationId: "test"
+  }) {
+    transaction {
+      id
+      value
+      senderAccountId
+      receiverAccountId
     }
     clientMutationId
   }

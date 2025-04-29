@@ -3,6 +3,7 @@ import { AccountLoader } from './AccountLoader';
 import { connectionArgs } from 'graphql-relay';
 import { GraphQLID, GraphQLNonNull } from 'graphql';
 import { fromGlobalId } from 'graphql-relay';
+import { Account } from './AccountModel';
 
 export const accountField = (key: string) => ({
 	[key]: {
@@ -30,8 +31,24 @@ export const rootAccountField = {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
   resolve: async (_, { id }, context) => {
-    const { type, id: dbId } = fromGlobalId(id);
-    if (type !== 'Account') return null;
-    return AccountLoader.load(context, dbId);
+    // Try Relay globalId
+    try {
+      const { type, id: dbId } = fromGlobalId(id);
+      if (type === 'Account' && /^[a-f\d]{24}$/i.test(dbId)) {
+        return AccountLoader.load(context, dbId);
+      }
+    } catch {}
+    // Try direct ObjectId
+    if (/^[a-f\d]{24}$/i.test(id)) {
+      return AccountLoader.load(context, id);
+    }
+    // Try accountNumber
+    const account = await Account.findOne({ accountNumber: id });
+    if (account) {
+      return AccountLoader.load(context, account._id.toString());
+    }
+    return null;
   },
 };
+
+export { AccountType, accountConnection };

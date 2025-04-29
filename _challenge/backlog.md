@@ -125,13 +125,20 @@ npx jest
 Extras:
 - [x] Criei um endpoint para poder dar fetch em uma única conta por ID
 
+### tag v1.9.0
+- [x] Conferir se o refactor do Transaction não quebrou o subscription - quebrou... já ajustado!
+- [x] Refatorei o fluxo de Transações para arquitetura mais modular e limpa
+- [x] Corrigi e reataivei o Subscription GraphQL TransactionAdded 
+- [x] Permiti que a mutation de transação aceite accountNumber, ObjectId ou Relay globalId para origem/destino
+- [x] Testei eventos de transação em Redis PubSub utilizando scripts auxiliares (subscribeAccountAdded.js, subscribeTransactionMade.js - [scripts/dev/](https://github.com/lfariabr/woovi-playground/tree/main/scripts/dev)) devido a limitações de validação no GraphiQL Playground
+- [x] Adicionei suporte para utilizar o accountNumber em requisições de API para busca de contas e realização de transferências, visando facilitar os testes durante o desafio (sabendo que, em ambiente de produção, o ideal seria trabalhar apenas com identificadores únicos, que também estão presentes usando mongoDB ObjectIds).
+
 ---
 
 ## In Progress
 
 ## Next Tasks
 
-- [ ] Conferir se o refactor do Transaction não quebrou o subscription
 - [ ] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 
 ---

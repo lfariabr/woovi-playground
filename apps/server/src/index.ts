@@ -6,7 +6,6 @@ import { connectDatabase } from './database';
 import { createGraphqlWs } from './server/createGraphqlWs';
 import { getContext } from './server/getContext';
 import { schema } from './schema/schema';
-import { wsServer } from './server/wsServer';
 
 (async () => {
 	await connectDatabase();
