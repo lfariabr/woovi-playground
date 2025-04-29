@@ -131,7 +131,7 @@ Extras:
 - [x] Corrigi e reataivei o Subscription GraphQL TransactionAdded 
 - [x] Permiti que a mutation de transação aceite accountNumber, ObjectId ou Relay globalId para origem/destino
 - [x] Testei eventos de transação em Redis PubSub utilizando scripts auxiliares (subscribeAccountAdded.js, subscribeTransactionMade.js - [scripts/dev/](https://github.com/lfariabr/woovi-playground/tree/main/scripts/dev)) devido a limitações de validação no GraphiQL Playground
-- [x] Adicionei suporte para utilizar o accountNumber em requisições de API para busca de contas e realização de transferências, visando facilitar os testes durante o desafio (sabendo que, em ambiente de produção, o ideal seria trabalhar apenas com identificadores únicos, que também estão presentes usando mongoDB ObjectIds).
+- [x] Adicionei suporte para utilizar o accountNumber em requisições de API para busca de contas e realização de transferências, visando facilitar os testes durante o desafio. Em ambiente de produção, o ideal seria trabalhar apenas com identificadores únicos, como os ObjectIds do MongoDB, que também continuam disponíveis.
 
 ---
 
