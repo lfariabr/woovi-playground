@@ -37,3 +37,5 @@ npm-debug.log*
 
 # windsurf rules
 # .windsurfrules
+.windsurf
+.windsurfrules
