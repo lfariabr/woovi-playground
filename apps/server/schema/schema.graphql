@@ -12,6 +12,34 @@ type Query {
     """Returns the last n items from the list."""
     last: Int
   ): MessageConnection
+  accounts(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): AccountConnection
+  account(id: ID!): Account
+  transactions(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): TransactionConnection
+  transaction(id: ID!): Transaction
 }
 
 """A connection to a list of items."""
@@ -61,8 +89,61 @@ interface Node {
   id: ID!
 }
 
+"""Represents an account"""
+type Account implements Node {
+  id: ID!
+  accountNumber: String!
+  balance: String
+  userTaxId: String
+  createdAt: String
+  updatedAt: String
+  transactions(
+    after: String
+    first: Int
+    before: String
+    last: Int
+  ): TransactionConnection
+}
+
+"""A connection to a list of accounts."""
+type AccountConnection {
+  pageInfo: PageInfo!
+  edges: [AccountEdge]
+}
+
+"""An edge in an account connection."""
+type AccountEdge {
+  node: Account
+  cursor: String!
+}
+
+"""Represents a transaction"""
+type Transaction implements Node {
+  id: ID!
+  senderAccountId: String
+  receiverAccountId: String
+  idempotencyKey: String
+  value: String!
+  description: String
+  createdAt: String
+}
+
+"""A connection to a list of transactions."""
+type TransactionConnection {
+  pageInfo: PageInfo!
+  edges: [TransactionEdge]
+}
+
+"""An edge in a transaction connection."""
+type TransactionEdge {
+  node: Transaction
+  cursor: String!
+}
+
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
+  AccountAdd(input: AccountAddInput!): AccountAddPayload
+  createTransaction(input: TransactionAddInput!): TransactionAddPayload
 }
 
 type MessageAddPayload {
@@ -75,8 +156,35 @@ input MessageAddInput {
   clientMutationId: String
 }
 
+type AccountAddPayload {
+  account: Account
+  clientMutationId: String
+}
+
+input AccountAddInput {
+  accountNumber: String!
+  balance: Float!
+  userTaxId: String!
+  clientMutationId: String
+}
+
+type TransactionAddPayload {
+  transaction: Transaction
+  clientMutationId: String
+}
+
+input TransactionAddInput {
+  value: Int!
+  senderAccountId: String!
+  receiverAccountId: String!
+  idempotencyKey: String!
+  clientMutationId: String
+}
+
 type Subscription {
   MessageAdded(input: MessageAddedInput!): MessageAddedPayload
+  AccountAdded(input: AccountAddedInput!): AccountAddedPayload
+  TransactionAdded(input: TransactionAddedInput!): TransactionAddedPayload
 }
 
 type MessageAddedPayload {
@@ -85,5 +193,23 @@ type MessageAddedPayload {
 }
 
 input MessageAddedInput {
+  clientSubscriptionId: String
+}
+
+type AccountAddedPayload {
+  account: Account
+  clientSubscriptionId: String
+}
+
+input AccountAddedInput {
+  clientSubscriptionId: String
+}
+
+type TransactionAddedPayload {
+  transaction: Transaction
+  clientSubscriptionId: String
+}
+
+input TransactionAddedInput {
   clientSubscriptionId: String
 }

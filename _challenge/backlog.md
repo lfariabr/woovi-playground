@@ -114,7 +114,16 @@ console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 - [x] Os testes cobrem: Criação de registros, Validações de entrada, Execução de mutations, Consulta de dados (queries)
 - [x] Adicionado tsconfig.server.json para compatibilidade do ts com ts-jest
 - [x] Reestruturada a organização da pasta de testes
-- [x] Atualizados package.json, jest.config.js e configurações relacionadas
+```run tests
+npx jest --clearCache
+npx jest
+```
+
+### tag v1.8.0
+- [x] Atualizando arquivo `schema.graphql`[apps/server/schema/schema.graphql](https://github.com/lfariabr/woovi-playground/tree/main/apps/server/schema/schema.graphql) para adicionar novas queries e mutations
+- [x] Criar arquivo `examples.graphql`[apps/server/schema/examples.graphql](https://github.com/lfariabr/woovi-playground/tree/main/apps/server/schema/examples.graphql) com queries de exemplo
+Extras:
+- [x] Criei um endpoint para poder dar fetch em uma única conta por ID
 
 ---
 
@@ -143,6 +152,6 @@ console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 - [x] Criação de Release no GitHub com changelog
 - [x] Subscription para Transaction adicionada
 - [x] Testes unitários com Jest
+- [x] Arquivo `.graphql` ou `.http` com queries de exemplo
 - [ ] Dockerfile + docker-compose.yml para ambiente local
 - [ ] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
-- [ ] Arquivo `.graphql` ou `.http` com queries de exemplo

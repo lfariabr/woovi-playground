@@ -1,0 +1,155 @@
+# Example Queries
+
+# List messages with pagination
+query {
+  messages(first: 5) {
+    edges {
+      node {
+        id
+        content
+        createdAt
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+
+# List accounts
+query {
+  accounts(first: 5) {
+    edges {
+      node {
+        id
+        accountNumber
+        balance
+        userTaxId
+        createdAt
+        updatedAt
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+
+# Fetch a single account by ID
+query {
+  account(id: "<ACCOUNT_ID>") {
+    id
+    accountNumber
+    balance
+    userTaxId
+    transactions(first: 3) {
+      edges {
+        node {
+          id
+          value
+          createdAt
+        }
+      }
+    }
+  }
+}
+
+# List transactions
+query {
+  transactions(first: 5) {
+    edges {
+      node {
+        id
+        value
+        senderAccountId
+        receiverAccountId
+        description
+        createdAt
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+
+# Fetch a single transaction by ID
+query {
+  transaction(id: "<TRANSACTION_ID>") {
+    id
+    value
+    senderAccountId
+    receiverAccountId
+    description
+    createdAt
+  }
+}
+
+# Example Mutations
+
+# Add an account
+mutation {
+  AccountAdd(input: {
+    accountNumber: "1234567890"
+    balance: 1000
+    userTaxId: "TAX123456"
+    clientMutationId: "test"
+  }) {
+    account {
+      id
+      accountNumber
+      balance
+    }
+    clientMutationId
+  }
+}
+
+# Add a transaction
+mutation {
+  createTransaction(input: {
+    value: 500
+    senderAccountId: "<SENDER_ID>"
+    receiverAccountId: "<RECEIVER_ID>"
+    idempotencyKey: "unique-key-001"
+    clientMutationId: "test"
+  }) {
+    transaction {
+      id
+      value
+    }
+    clientMutationId
+  }
+}
+
+# Example Subscriptions
+
+# Subscribe to new accounts
+subscription {
+  AccountAdded(input: {clientSubscriptionId: "test"}) {
+    account {
+      id
+      accountNumber
+      balance
+    }
+    clientSubscriptionId
+  }
+}
+
+# Subscribe to new transactions
+subscription {
+  TransactionAdded(input: {clientSubscriptionId: "test"}) {
+    transaction {
+      id
+      value
+      senderAccountId
+      receiverAccountId
+    }
+    clientSubscriptionId
+  }
+}

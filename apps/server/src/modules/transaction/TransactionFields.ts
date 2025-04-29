@@ -1,6 +1,8 @@
 import { TransactionType, TransactionConnection } from './TransactionType';
 import { TransactionLoader } from './TransactionLoader';
 import { connectionArgs } from 'graphql-relay';
+import { GraphQLID, GraphQLNonNull } from 'graphql';
+import { fromGlobalId } from 'graphql-relay';
 
 export const transactionField = (key: string) => ({
 	[key]: {
@@ -21,3 +23,15 @@ export const transactionConnectionField = (key: string) => ({
 		},
 	},
 });
+
+export const rootTransactionField = {
+  type: TransactionType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  resolve: async (_, { id }, context) => {
+    const { type, id: dbId } = fromGlobalId(id);
+    if (type !== 'Transaction') return null;
+    return TransactionLoader.load(context, dbId);
+  },
+};
