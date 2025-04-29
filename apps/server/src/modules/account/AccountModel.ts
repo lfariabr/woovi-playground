@@ -19,6 +19,10 @@ const Schema = new mongoose.Schema<IAccount>(
 			unique: true,
 			required: true,
 		},
+		name: {
+			type: String,
+			required: true,
+		},
 	},
 	{
 		collection: 'Account',
@@ -28,6 +32,7 @@ const Schema = new mongoose.Schema<IAccount>(
 
 export type IAccount = {
 	accountNumber: string;
+	name: string;
 	balance: number;
 	userTaxId: string;
 	createdAt: Date;

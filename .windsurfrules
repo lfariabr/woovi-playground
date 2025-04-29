@@ -1,0 +1,115 @@
+# Woovi Playground Challenge — Personal Guideline (Luis Maluco Version)
+
+## 🎯 Objective
+Deliver a full-stack GraphQL + Relay CRUD bank system with production-level quality, respecting Woovi's stack (Node.js, Koa, GraphQL, MongoDB, Redis, React, Next.js, Relay).
+
+Goal:
+- Clean, modular architecture
+- Strong typing (TypeScript)
+- Optimized data loading and pagination (Relay Connections)
+- Real-time updates (GraphQL Subscriptions)
+- Code that looks professional, testable, and scalable
+
+---
+
+# 🛠️ Backend Instructions
+
+### 1. Follow the stack standards strictly:
+- Node.js + Koa as the HTTP server
+- GraphQL API exposed
+- MongoDB for data storage (Accounts, Transactions)
+- Redis PubSub for Subscriptions
+- TypeScript across the entire backend
+- Relay-style pagination (Connection, Edges, Node) in every list query
+
+### 2. Backend Structure:
+- Organize code by domains: `/account`, `/transaction`, etc.
+- Keep the GraphQL types, loaders, resolvers, and controllers separated.
+- Implement DataLoaders for batching whenever there is an N+1 query risk.
+
+### 3. Business Rules (Banking logic):
+- Prevent transactions where senderAccountId == receiverAccountId.
+- Ensure idempotency on transaction creation (idempotencyKey required).
+- Guarantee balance consistency using MongoDB atomic operations (`$inc`).
+- Handle race conditions safely (especially for concurrent transactions).
+
+### 4. Validation:
+- Use `zod` for input validation inside Controllers.
+- Return structured, user-friendly GraphQL errors (no raw database errors).
+
+### 5. Logging:
+- Structured logs for all important actions (new transaction, errors, idempotency collisions, validation failures).
+
+### 6. Testing:
+- Cover the core of your business logic with Jest tests:
+  - Create
+  - Validation
+  - Mutation
+  - Query
+- Keep business tests (`TransactionMutation.test.ts`) separated from model tests (`TransactionModel.test.ts`).
+
+---
+
+# 💻 Frontend Instructions
+
+### 1. Follow Relay principles:
+- Use `usePaginationFragment` for paginated lists.
+- Use `useMutation` for Account and Transaction creation.
+- Use `useSubscription` for real-time Transaction/Account updates.
+- Respect the Relay GraphQL shape (edges → node → fields).
+
+### 2. Component Structure:
+- Break down into clear reusable components.
+- Separate container (data-fetching) components from presentational components where possible.
+
+### 3. Error Handling:
+- Gracefully handle network, GraphQL, and server validation errors in the UI.
+
+### 4. UX Enhancements:
+- Show loading spinners during queries and mutations.
+- Display optimistic updates when creating Accounts or Transactions if possible.
+
+---
+
+# 🔥 Bonus / Extra (Only if time allows)
+- Add pagination for Transactions under Accounts (already half done via Relay Connection).
+- Improve GraphQL error reporting with custom Error Types.
+- Add Docker Compose files to fully containerize MongoDB/Redis locally.
+- Document your stack and project structure with a clean `README.md`.
+- Add GitHub Releases per version/tag milestone (`v1.0.0`, `v1.7.0`, `v1.10.0`, etc).
+
+---
+
+# 🧠 Mindset Reminders
+- Think like a real product engineer: "Would I ship this to production?"
+- Code should be understandable at a glance, testable, and extendable.
+- Aim for real-time experience, not just CRUD.
+- Remember: You are not just coding — you are demonstrating how you think and solve problems.
+
+---
+
+# 🛡️ Rules to Self-Check Before Submitting
+- [ ] Does every query use a Relay Connection?
+- [ ] Are all mutations validated and logged properly?
+- [ ] Are all critical paths covered by tests?
+- [ ] Are race conditions (balance updates, idempotency) handled?
+- [ ] Can I follow the flow easily by reading the folder structure?
+- [ ] Does the code feel modular, clean, and ready for scaling?
+- [ ] Is the Frontend integrated smoothly using Relay hooks?
+
+---
+
+# ✍️ Final touch
+After reaching the final stage (v1.10.0 milestone):
+- Summarize the achievements in a clear `RELEASE.md`.
+- Prepare a clean Pull Request with professional language.
+- If possible, show small demo gifs or screenshots of the working app (optional but impressive).
+
+---
+
+# 🚀 Quick motivational closer
+You only need ONE SHOT to impress.  
+Make every commit count.  
+Build it like you're already part of the Woovi engineering team.
+
+---

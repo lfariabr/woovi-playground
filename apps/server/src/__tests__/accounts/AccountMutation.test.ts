@@ -23,7 +23,7 @@ describe('AccountMutation', () => {
   });
 
   it('should update account balance', async () => {
-    const account = new Account({ accountNumber: 'ACC001', balance: 100, userTaxId: 'TAX_ACC001' });
+    const account = new Account({ accountNumber: 'ACC001', balance: 100, userTaxId: 'TAX_ACC001', name: 'Account 1' });
     await account.save();
     account.balance = 500;
     await account.save();

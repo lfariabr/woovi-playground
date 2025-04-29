@@ -6,6 +6,7 @@ import { ITransaction } from './TransactionModel';
 import { nodeInterface } from '../node/typeRegister';
 import { registerTypeLoader } from '../node/typeRegister';
 import { TransactionLoader } from './TransactionLoader';
+import { AccountLoader } from '../account/AccountLoader';
 
 const TransactionType = new GraphQLObjectType<ITransaction>({
 	name: 'Transaction',
@@ -35,6 +36,22 @@ const TransactionType = new GraphQLObjectType<ITransaction>({
 		createdAt: {
 			type: GraphQLString,
 			resolve: (transaction) => transaction.createdAt.toISOString(),
+		},
+		senderAccountNumber: {
+			type: GraphQLString,
+			resolve: async (tx, _, context) => {
+			  if (!tx.senderAccountId) return null;
+			  const account = await AccountLoader.load(context, tx.senderAccountId.toString());
+			  return account?.accountNumber ?? null;
+			},
+		  },
+		  receiverAccountNumber: {
+			type: GraphQLString,
+			resolve: async (tx, _, context) => {
+			  if (!tx.receiverAccountId) return null;
+			  const account = await AccountLoader.load(context, tx.receiverAccountId.toString());
+			  return account?.accountNumber ?? null;
+			},
 		},
 	}),
 	interfaces: () => [nodeInterface],

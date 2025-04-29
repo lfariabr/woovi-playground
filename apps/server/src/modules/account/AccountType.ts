@@ -22,6 +22,10 @@ const AccountType = new GraphQLObjectType<IAccount>({
 			type: GraphQLString,
 			resolve: (account) => account.accountNumber,
 		},
+		name: {
+			type: GraphQLString,
+			resolve: (account) => account.name,
+		},
 		balance: {
 			type: GraphQLString,
 			resolve: (account) => account.balance,
@@ -55,6 +59,6 @@ const accountConnection = connectionDefinitions({
 	nodeType: AccountType,
 });
 
-registerTypeLoader(AccountType, AccountLoader.load, TransactionLoader.loadMany);
+registerTypeLoader(AccountType, AccountLoader.load);
 
 export { AccountType, accountConnection };

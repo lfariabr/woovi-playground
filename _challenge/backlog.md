@@ -133,6 +133,13 @@ Extras:
 - [x] Testei eventos de transação em Redis PubSub utilizando scripts auxiliares (subscribeAccountAdded.js, subscribeTransactionMade.js - [scripts/dev/](https://github.com/lfariabr/woovi-playground/tree/main/scripts/dev)) devido a limitações de validação no GraphiQL Playground
 - [x] Adicionei suporte para utilizar o accountNumber em requisições de API para busca de contas e realização de transferências, visando facilitar os testes durante o desafio. Em ambiente de produção, o ideal seria trabalhar apenas com identificadores únicos, como os ObjectIds do MongoDB, que também continuam disponíveis.
 
+### tag v1.9.0
+- [x] pnpm relay-compiler
+- [x] Refatoração do backend de Transações: mais modular, limpo e com melhor tratamento de erros.
+- [x] Modelos (Account, Transaction) agora exigem todos os campos obrigatórios (name, createdAt).
+- [x] Todos os testes atualizados e passando com as novas validações
+- [x] Novo playground front-end em [apps/web/src/pages/test.tsx]: base pronta em Relay/React para futuras melhorias (paginação Relay, subscriptions em tempo real, UX, etc).
+
 ---
 
 ## In Progress

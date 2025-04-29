@@ -140,10 +140,10 @@ mutation {
 # Example: Create a transaction using accountNumber for sender/receiver
 mutation {
   createTransaction(input: {
-    value: 500
-    senderAccountId: "999" # accountNumber can be used directly
-    receiverAccountId: "444" # accountNumber can be used directly
-    idempotencyKey: "unique-key-002"
+    value: 10
+    senderAccountId: "444"
+    receiverAccountId: "999"
+    idempotencyKey: "unique-key-009"
     clientMutationId: "test"
   }) {
     transaction {
@@ -151,6 +151,7 @@ mutation {
       value
       senderAccountId
       receiverAccountId
+      createdAt
     }
     clientMutationId
   }

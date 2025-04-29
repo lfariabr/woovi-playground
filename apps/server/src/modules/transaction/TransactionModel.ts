@@ -20,6 +20,10 @@ const Schema = new mongoose.Schema<ITransaction>(
       required: true,
       unique: true,
     },
+    createdAt: {
+      type: Date,
+      required: true,
+    },
     value: {
       type: mongoose.Schema.Types.Decimal128,
       required: true,

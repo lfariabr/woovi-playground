@@ -12,6 +12,7 @@ const transferFundsSchema = z.object({
   senderAccountId: z.string(),
   receiverAccountId: z.string(),
   idempotencyKey: z.string(),
+  createdAt: z.string().optional(),
 });
 
 async function resolveAccountId(accountIdOrNumber: string) {
@@ -46,7 +47,7 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
       });
     }
 
-    const { amount, senderAccountId, receiverAccountId, idempotencyKey } = parsed.data;
+    const { amount, senderAccountId, receiverAccountId, idempotencyKey, createdAt } = parsed.data;
 
     // Accept accountNumber, globalId, or ObjectId for sender/receiver
     const resolvedSenderAccountId = await resolveAccountId(senderAccountId);
@@ -68,6 +69,18 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
     if (!receiver) {
       console.error(`[Transaction] Receiver account not found: ${resolvedReceiverAccountId}`);
       throw new GraphQLError('Receiver account not found');
+    }
+
+    // Parse createdAt or use now
+    let createdAtDate: Date;
+    if (createdAt) {
+      const parsedDate = new Date(createdAt);
+      if (isNaN(parsedDate.getTime())) {
+        throw new GraphQLError('Invalid createdAt date format. Use ISO8601 string.');
+      }
+      createdAtDate = parsedDate;
+    } else {
+      createdAtDate = new Date();
     }
 
     // Idempotency enforcement to check for existing transaction by sender + idempotentKey
@@ -109,6 +122,7 @@ export async function transferTypeValidator(args: z.infer<typeof transferFundsSc
         receiverAccountId: resolvedReceiverAccountId,
         value: amount,
         idempotentKey: idempotencyKey,
+        createdAt: createdAtDate,
       });
     } catch (err: any) {
       // Handle duplicate key error (race condition fallback)

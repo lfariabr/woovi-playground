@@ -36,4 +36,4 @@ npm-debug.log*
 **/__generated__/*.ts
 
 # windsurf rules
-.windsurfrules
+# .windsurfrules

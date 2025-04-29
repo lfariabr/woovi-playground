@@ -23,7 +23,13 @@ describe('AccountQuery', () => {
   });
 
   it('should find account by accountNumber', async () => {
-    const account = new Account({ accountNumber: 'ACC002', balance: 200, userTaxId: 'TAX_ACC002' });
+    const accountData = {
+      name: 'Account 1',
+      accountNumber: 'ACC002',
+      balance: 200,
+      userTaxId: 'TAX_ACC002',
+    };
+    const account = new Account(accountData);
     await account.save();
     const found = await Account.findOne({ accountNumber: 'ACC002' });
     expect(found).not.toBeNull();

@@ -26,11 +26,23 @@ describe('TransactionQuery', () => {
   });
 
   it('should find transaction by idempotentKey', async () => {
-    const sender = new Account({ accountNumber: 'ACC003', balance: 1000, userTaxId: 'TAX_ACC003' });
+    const senderData = {
+      name: 'Account 1',
+      accountNumber: 'ACC003',
+      balance: 1000,
+      userTaxId: 'TAX_ACC003',
+    };
+    const sender = new Account(senderData);
     await sender.save();
-    const receiver = new Account({ accountNumber: 'ACC004', balance: 500, userTaxId: 'TAX_ACC004' });
+    const receiverData = {
+      name: 'Account 2',
+      accountNumber: 'ACC004',
+      balance: 500,
+      userTaxId: 'TAX_ACC004',
+    };
+    const receiver = new Account(receiverData);
     await receiver.save();
-    const transaction = new Transaction({ senderAccountId: sender._id, receiverAccountId: receiver._id, value: 100, idempotentKey: 'TKEY1' });
+    const transaction = new Transaction({ senderAccountId: sender._id, receiverAccountId: receiver._id, value: 100, idempotentKey: 'TKEY1', createdAt: new Date() });
     await transaction.save();
     const found = await Transaction.findOne({ idempotentKey: 'TKEY1' });
     expect(found).not.toBeNull();

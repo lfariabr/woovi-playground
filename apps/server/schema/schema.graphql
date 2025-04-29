@@ -1,3 +1,9 @@
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
 type Query {
   messages(
     """Returns the items in the list that come after the specified cursor."""
@@ -40,6 +46,7 @@ type Query {
     last: Int
   ): TransactionConnection
   transaction(id: ID!): Transaction
+  node(id: ID!): Node
 }
 
 """A connection to a list of items."""
@@ -83,23 +90,19 @@ type Message implements Node {
   createdAt: String
 }
 
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
-  id: ID!
-}
-
 """Represents an account"""
 type Account implements Node {
   id: ID!
   accountNumber: String!
   balance: String
+  name: String!
   userTaxId: String
   createdAt: String
   updatedAt: String
   transactions(
     after: String
     first: Int
+    createdAt: String 
     before: String
     last: Int
   ): TransactionConnection
@@ -211,5 +214,6 @@ type TransactionAddedPayload {
 }
 
 input TransactionAddedInput {
+  accountId: ID!
   clientSubscriptionId: String
 }

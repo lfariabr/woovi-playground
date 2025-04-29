@@ -24,6 +24,7 @@ afterEach(async () => {
 describe('AccountModel', () => {
   it('should create and retrieve an account', async () => {
     const accountData = {
+      name: 'Account 1',
       accountNumber: '123456',
       balance: 1000,
       userTaxId: 'TAXID001',
@@ -40,6 +41,7 @@ describe('AccountModel', () => {
 
   it('should not create an account with duplicate userTaxId', async () => {
     const accountData = {
+      name: 'Account 1',
       accountNumber: '123456',
       balance: 1000,
       userTaxId: 'TAXID001',
@@ -53,11 +55,13 @@ describe('AccountModel', () => {
   });
   it('should not create an account with duplicate accountNumber', async () => {
     const accountData1 = {
+      name: 'Account 1',
       accountNumber: '123457',
       balance: 1000,
       userTaxId: 'TAXID001',
     };
     const accountData2 = {
+      name: 'Account 2',
       accountNumber: '123457', // duplicate accountNumber
       balance: 2000,
       userTaxId: 'TAXID002',
