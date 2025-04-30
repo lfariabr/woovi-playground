@@ -120,6 +120,15 @@ type AccountEdge {
   cursor: String!
 }
 
+"""Direction of the transaction relative to the account"""
+enum TransactionDirection {
+  """Money sent from the account"""
+  SENT
+  
+  """Money received into the account"""
+  RECEIVED
+}
+
 """Represents a transaction"""
 type Transaction implements Node {
   id: ID!
@@ -129,6 +138,8 @@ type Transaction implements Node {
   value: Float!
   description: String
   createdAt: String
+  """Indicates whether this transaction was sent or received by the account"""
+  type: TransactionDirection
 }
 
 """A connection to a list of transactions."""
@@ -182,6 +193,7 @@ input AccountAddInput {
   accountNumber: String!
   balance: Float!
   userTaxId: String!
+  name: String!
   clientMutationId: String
 }
 

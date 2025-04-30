@@ -5,6 +5,7 @@ import styles from '../styles/AccountSection.module.css';
 import type { AccountSectionQuery } from '../__generated__/AccountSectionQuery.graphql';
 import type { AccountSectionFragment$key } from '../__generated__/AccountSectionFragment.graphql';
 import type { AccountSectionPaginationQuery } from '../__generated__/AccountSectionPaginationQuery.graphql';
+import { formatCurrency } from '../helpers/formatter';
 
 // Inline GraphQL definitions (replicando fluxo Message)
 const AccountSectionQuery = graphql`
@@ -31,7 +32,9 @@ const AccountSectionFragment = graphql`
           value
           createdAt
           senderAccountId
+          receiverAccountId
           description
+          type
         }
       }
       pageInfo {
@@ -54,7 +57,9 @@ const AccountSectionSubscription = graphql`
         value
         createdAt
         senderAccountId
+        receiverAccountId
         description
+        type
       }
     }
   }
@@ -91,7 +96,7 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
       <div className={styles.sectionHeader}>Account Details</div>
       <Box className={styles.accountSectionHeader}>
         <Typography variant="h6" className={styles.accountSectionName}>Account: {accountData.name}</Typography>
-        <Typography variant="subtitle1" className={styles.accountSectionBalance}>Balance: R$ {accountData.balance}</Typography>
+        <Typography variant="subtitle1" className={styles.accountSectionBalance}>Balance: {formatCurrency(accountData.balance)}</Typography>
       </Box>
       <Box>
         <Box className={styles.transactionsHeader}>

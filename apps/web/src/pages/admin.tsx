@@ -14,7 +14,7 @@ const TransactionsAdminCheckpointPage = () => {
     <main>
       <Typography variant="h4" gutterBottom>Transactions – Admin Checkpoint</Typography>
       <Typography variant="subtitle1" gutterBottom>
-        Busque qualquer Account ID pra ver saldo e transações. (Admin/Test mode)
+        Busque qualquer Account ID pra ver o saldo e transações. (Admin/Test mode)
       </Typography>
       <Box sx={{ mb: 2 }}>
         <TextField

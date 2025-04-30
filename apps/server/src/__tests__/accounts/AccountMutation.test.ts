@@ -23,11 +23,11 @@ describe('AccountMutation', () => {
   });
 
   it('should update account balance', async () => {
-    const account = new Account({ accountNumber: 'ACC001', balance: 100, userTaxId: 'TAX_ACC001', name: 'Account 1' });
+    const account = new Account({ accountNumber: 'ACC001', balance: mongoose.Types.Decimal128.fromString('100'), userTaxId: 'TAX_ACC001', name: 'Account 1' });
     await account.save();
-    account.balance = 500;
+    account.balance = mongoose.Types.Decimal128.fromString('500') as any;
     await account.save();
     const updated = await Account.findOne({ accountNumber: 'ACC001' });
-    expect(updated?.balance).toBe(500);
+    expect(updated?.balance).toEqual(mongoose.Types.Decimal128.fromString('500'));
   });
 });

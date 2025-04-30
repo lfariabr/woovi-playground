@@ -11,6 +11,7 @@ export type AccountAddInput = {
 	accountNumber: string;
 	balance: number;
 	userTaxId: string;
+	name: string;
 };
 
 const mutation = mutationWithClientMutationId({
@@ -18,12 +19,19 @@ const mutation = mutationWithClientMutationId({
 	inputFields: {
 		accountNumber: {
 			type: new GraphQLNonNull(GraphQLString),
+			description: 'Número da conta',
 		},
 		balance: {
 			type: new GraphQLNonNull(GraphQLFloat),
+			description: 'Saldo da conta',
 		},
 		userTaxId: {
 			type: new GraphQLNonNull(GraphQLString),
+			description: 'CPF do usuário',
+		},
+		name: {
+			type: new GraphQLNonNull(GraphQLString),
+			description: 'Nome da conta',
 		},
 	},
 	mutateAndGetPayload: async (args: AccountAddInput) => {
@@ -31,6 +39,7 @@ const mutation = mutationWithClientMutationId({
 			accountNumber: args.accountNumber,
 			balance: args.balance,
 			userTaxId: args.userTaxId,
+			name: args.name,
 		}).save();
 
 		console.log('MUTATION publishing:', { account: account._id.toString(), accountNumber: account.accountNumber });

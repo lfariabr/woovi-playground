@@ -52,6 +52,7 @@ query {
           id
           value
           createdAt
+          type
         }
       }
     }
@@ -79,6 +80,7 @@ query {
         receiverAccountId
         description
         createdAt
+        type
       }
       cursor
     }
@@ -98,6 +100,7 @@ query {
     receiverAccountId
     description
     createdAt
+    type
   }
 }
 
@@ -106,15 +109,17 @@ query {
 # Add an account
 mutation {
   AccountAdd(input: {
-    accountNumber: "1234567890"
+    accountNumber: "11"
     balance: 1000
-    userTaxId: "TAX123456"
+    userTaxId: "TAX1234567"
+    name: "Conta Principal"
     clientMutationId: "test"
   }) {
     account {
       id
       accountNumber
       balance
+      name
     }
     clientMutationId
   }
@@ -179,6 +184,7 @@ subscription {
       value
       senderAccountId
       receiverAccountId
+      type
     }
     clientSubscriptionId
   }

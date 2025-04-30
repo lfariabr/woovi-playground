@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLEnumType } from 'graphql';
 import { globalIdField, connectionDefinitions } from 'graphql-relay';
 import type { ConnectionArguments } from 'graphql-relay';
 
@@ -7,6 +7,15 @@ import { nodeInterface } from '../node/typeRegister';
 import { registerTypeLoader } from '../node/typeRegister';
 import { TransactionLoader } from './TransactionLoader';
 import { AccountLoader } from '../account/AccountLoader';
+
+const TransactionDirectionType = new GraphQLEnumType({
+  name: 'TransactionDirection',
+  description: 'Direction of the transaction relative to the account',
+  values: {
+    SENT: { value: 'SENT', description: 'Money sent from the account' },
+    RECEIVED: { value: 'RECEIVED', description: 'Money received into the account' }
+  }
+});
 
 const TransactionType = new GraphQLObjectType<ITransaction>({
 	name: 'Transaction',
@@ -36,6 +45,12 @@ const TransactionType = new GraphQLObjectType<ITransaction>({
 		createdAt: {
 			type: GraphQLString,
 			resolve: (transaction) => transaction.createdAt.toISOString(),
+		},
+		// Add type field to indicate if the transaction was sent or received
+		type: {
+			type: TransactionDirectionType,
+			description: 'Indicates whether this transaction was sent or received by the account',
+			resolve: (tx) => tx.type || null,
 		},
 		senderAccountNumber: {
 			type: GraphQLString,

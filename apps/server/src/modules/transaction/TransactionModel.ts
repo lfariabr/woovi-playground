@@ -73,6 +73,8 @@ export type ITransaction = {
   description?: string;
   createdAt: Date;
   updatedAt: Date;
+  // Added type field to fix lint error in TransactionType
+  type?: 'SENT' | 'RECEIVED'; // added by the loader, not in the database model
 } & Document;
 
 export const Transaction: Model<ITransaction> = mongoose.model('Transaction', Schema);

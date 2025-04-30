@@ -28,7 +28,10 @@ const AccountType = new GraphQLObjectType<IAccount>({
 		},
 		balance: {
 			type: GraphQLString,
-			resolve: (account) => account.balance,
+			resolve: (account) =>
+			  account.balance && typeof account.balance.toString === 'function'
+			    ? account.balance.toString()
+			    : account.balance,
 		},
 		userTaxId: {
 			type: GraphQLString,

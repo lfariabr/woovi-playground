@@ -33,6 +33,6 @@ describe('AccountQuery', () => {
     await account.save();
     const found = await Account.findOne({ accountNumber: 'ACC002' });
     expect(found).not.toBeNull();
-    expect(found?.balance).toBe(200);
+    expect(found?.balance?.toString()).toBe('200');
   });
 });

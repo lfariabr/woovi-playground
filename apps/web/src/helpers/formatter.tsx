@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export function formatDate(iso: string) {
     const d = new Date(iso);
     return d.toLocaleString('en-GB', {
@@ -6,3 +8,13 @@ export function formatDate(iso: string) {
       hour12: false
     }).replace(',', '');
   }
+
+export function formatCurrency(value: number | string | null): string {
+    const num = typeof value === 'number' ? value : parseFloat(value?.toString() || '0');
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(num);
+}

@@ -36,7 +36,7 @@ describe('AccountModel', () => {
     const found = await Account.findOne({ userTaxId: 'TAXID001' });
     expect(found).not.toBeNull();
     expect(found?.accountNumber).toBe('123456');
-    expect(found?.balance).toBe(1000);
+    expect(found?.balance?.toString()).toBe('1000');
   });
 
   it('should not create an account with duplicate userTaxId', async () => {
@@ -56,13 +56,13 @@ describe('AccountModel', () => {
   it('should not create an account with duplicate accountNumber', async () => {
     const accountData1 = {
       name: 'Account 1',
-      accountNumber: '123457',
+      accountNumber: '1',
       balance: 1000,
       userTaxId: 'TAXID001',
     };
     const accountData2 = {
       name: 'Account 2',
-      accountNumber: '123457', // duplicate accountNumber
+      accountNumber: '1', // duplicate accountNumber
       balance: 2000,
       userTaxId: 'TAXID002',
     };

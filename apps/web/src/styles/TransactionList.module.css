@@ -4,3 +4,13 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+.transactionSent {
+  border-left: 4px solid #f44336; /* Vermelho para saídas */
+  background-color: rgba(244, 67, 54, 0.05);
+}
+
+.transactionReceived {
+  border-left: 4px solid #4caf50; /* Verde para entradas */
+  background-color: rgba(76, 175, 80, 0.05);
+}
