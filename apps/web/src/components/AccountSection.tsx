@@ -1,17 +1,16 @@
 import { Box, Typography, Select, MenuItem, Button } from '@mui/material';
 import { graphql, useLazyLoadQuery, usePaginationFragment, useSubscription } from 'react-relay';
-import type { AccountSectionQuery } from './__generated__/AccountSectionQuery.graphql';
-import type { AccountSectionFragment$key } from './__generated__/AccountSectionFragment.graphql';
 import TransactionList from './TransactionList';
 import styles from '../styles/AccountSection.module.css';
+import type { AccountSectionQuery } from '../__generated__/AccountSectionQuery.graphql';
+import type { AccountSectionFragment$key } from '../__generated__/AccountSectionFragment.graphql';
+import type { AccountSectionPaginationQuery } from '../__generated__/AccountSectionPaginationQuery.graphql';
 
+// Inline GraphQL definitions (replicando fluxo Message)
 const AccountSectionQuery = graphql`
-  query AccountSectionQuery($id: ID!, $first: Int = 5, $after: String) {
+  query AccountSectionQuery($id: ID!, $first: Int) {
     account(id: $id) {
-      id
-      name
-      balance
-      ...AccountSectionFragment @arguments(first: $first, after: $after)
+      ...AccountSectionFragment @arguments(first: $first)
     }
   }
 `;
@@ -77,7 +76,7 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
     hasPrevious,
     isLoadingNext,
     isLoadingPrevious
-  } = usePaginationFragment<AccountSectionFragment$key>(AccountSectionFragment, data.account);
+  } = usePaginationFragment<AccountSectionPaginationQuery, AccountSectionFragment$key>(AccountSectionFragment, data.account);
 
   useSubscription({
     subscription: AccountSectionSubscription,

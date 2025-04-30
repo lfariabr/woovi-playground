@@ -126,7 +126,7 @@ type Transaction implements Node {
   senderAccountId: String
   receiverAccountId: String
   idempotencyKey: String
-  value: String!
+  value: Float!
   description: String
   createdAt: String
 }
@@ -144,7 +144,7 @@ type TransactionEdge {
 }
 
 input TransferInput {
-  value: Int!
+  value: Float!
   senderAccountId: String!
   receiverAccountId: String!
   idempotencyKey: String!

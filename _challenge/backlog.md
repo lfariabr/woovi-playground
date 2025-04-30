@@ -2,7 +2,7 @@
 
 ## Changelog:
 
-### tag v1.0.0
+### tag v1.0.0: feature/crud-bank-relay
 - [x] Criar branch `feat/crud-bank-relay`
 - [x] Forkar repositório e configurar Git remoto
 - [x] Criar estrutura de **Account** seguindo o padrão do `Message`:
@@ -16,7 +16,7 @@
 - [x] Fazer merge da feature com `main`
 - [x] Testes websocket
 
-### tag v1.1.0
+### tag v1.1.0: feature/account-subscriptions
 - [x] Criar sistema de **Account Subscriptions**:
 - [x] `AccountAddedSubscription.ts`
 - [x] `accountSubscriptions.ts`
@@ -31,15 +31,15 @@
   ws.onerror = (error) => console.error('WebSocket error:', error);
   ws.onmessage = (msg) => console.log('WebSocket message:', msg.data);
   ```
-### tag v1.2.0
+### tag v1.2.0: feature/transaction-model
 - [x] `TransactionModel.ts`/ `TransactionType.ts`/ `TransactionLoader.ts` (opcional)/ `transactionFields.ts`/ `transactionMutations.ts`/ `TransactionAddedSubscription.ts` (opcional)
 - [x] Criar tag `v1.2.0` da entrega
 
-### tag v1.3.0
+### tag v1.3.0: feature/techstack
 - [x] Criar `techstack.md`[_challenge/techstack.md](https://github.com/lfariabr/woovi-playground/tree/main/_challenge/techstack.md)
 - [x] Atualizar backlog com as atualizações dos últimos 2 dias
 
-### tag v1.4.0
+### tag v1.4.0: feature/transaction-connection
 - [x] Criar constant chamada TransactionConnection em `TransactionType.ts` (Relay para conexão das transações)
 - [x] Reutilizar a conexão em outro módulo em `TransactionFields.ts` expondo a lista de transações
 - [x] Linkar a conexão do TransactionType em `AccountType.ts`, adicionando o campo 'transactions' em AccounType
@@ -67,7 +67,7 @@ query {
 }
 ```
 
-### tag v1.5.0
+### tag v1.5.0: feature/data-loader
 - [x] (Optional) Transaction data-loader
 ```GraphiQL test Data Loader implementation
 query {
@@ -94,7 +94,7 @@ query {
 console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 ```
 
-### tag v1.6.0
+### tag v1.6.0: feature/transaction-controller
 - [x] Ajustado o fluxo de Transactions para ser dinâmico. A versão anterior estava hardcoded no `TransactionFields.ts`
 - [x] Criado `TransactionController` com a lógica de adicionar/remover transações
 - [x] Importado Zod para validação de dados no `Controller`
@@ -108,7 +108,7 @@ console.log('[DataLoader] Fetching transactions for accountIds:', accountIds);
 - [x] Melhorada a modularidade e a manutenibilidade do código para facilitar futuras integrações e novas funcionalidades
 - [x] Documentação e backlog atualizados para refletir o novo fluxo de transações
 
-### tag v1.7.0
+### tag v1.7.0: feature/jest-tdd
 - [x] Criado e expandido o conjunto de testes unitários com Jest para Accounts e Transactions
 - [x] Adicionados testes de mutation e query 
 - [x] Os testes cobrem: Criação de registros, Validações de entrada, Execução de mutations, Consulta de dados (queries)
@@ -119,13 +119,13 @@ npx jest --clearCache
 npx jest
 ```
 
-### tag v1.8.0
+### tag v1.8.0: feature/graphql-api-improvements
 - [x] Atualizando arquivo `schema.graphql`[apps/server/schema/schema.graphql](https://github.com/lfariabr/woovi-playground/tree/main/apps/server/schema/schema.graphql) para adicionar novas queries e mutations
 - [x] Criar arquivo `examples.graphql`[apps/server/schema/examples.graphql](https://github.com/lfariabr/woovi-playground/tree/main/apps/server/schema/examples.graphql) com queries de exemplo
 Extras:
 - [x] Criei um endpoint para poder dar fetch em uma única conta por ID
 
-### tag v1.9.0
+### tag v1.9.0: feature/transaction-refactor
 - [x] Conferir se o refactor do Transaction não quebrou o subscription - quebrou... já ajustado!
 - [x] Refatorei o fluxo de Transações para arquitetura mais modular e limpa
 - [x] Corrigi e reataivei o Subscription GraphQL TransactionAdded 
@@ -133,14 +133,14 @@ Extras:
 - [x] Testei eventos de transação em Redis PubSub utilizando scripts auxiliares (subscribeAccountAdded.js, subscribeTransactionMade.js - [scripts/dev/](https://github.com/lfariabr/woovi-playground/tree/main/scripts/dev)) devido a limitações de validação no GraphiQL Playground
 - [x] Adicionei suporte para utilizar o accountNumber em requisições de API para busca de contas e realização de transferências, visando facilitar os testes durante o desafio. Em ambiente de produção, o ideal seria trabalhar apenas com identificadores únicos, como os ObjectIds do MongoDB, que também continuam disponíveis.
 
-### tag v1.10.0
+### tag v1.10.0: feature/frontend-setup
 - [x] pnpm relay-compiler
 - [x] Refatoração do backend de Transações: mais modular, limpo e com melhor tratamento de erros.
 - [x] Modelos (Account, Transaction) agora exigem todos os campos obrigatórios (name, createdAt).
 - [x] Todos os testes atualizados e passando com as novas validações
 - [x] Novo playground front-end em [apps/web/src/pages/test.tsx]: base pronta em Relay/React para futuras melhorias (paginação Relay, subscriptions em tempo real, UX, etc).
 
-### tag v1.11.0
+### tag v1.11.0: feature/frontend-pagination
 - [x] Página test com a possibilidade de busca por AccountId e exibição simples de balance + histórico de transactions
 - [x] Front-end: Relay‐style pagination + useSubscription for TransactionAdded(input:{})
 - [x] implementado usePaginationFragment em `accountSection.tsx` com botões "NEXT" e "PREV" 
@@ -149,14 +149,21 @@ Extras:
 - [x] adicionado script validateSchema para validar o schema do backend com o schema do frontend
 - [x] criado página admin em `apps/web/src/pages/admin.tsx` com a possibilidade de busca por AccountId e exibição de saldo e transações
 
+### tag v1.12.0: feature/graphql-relay-alignment
+- [x] Padronização do fluxo relay: Queries, fragments e subscriptions agora são definidos inline nos componentes, seguindo o padrão Relay Modern (baseado no fluxo de Message já existente no playground)
+- [x] Tipagem TypeScript refatorada. Agora todos os hooks do Relay agora usam os tipos gerados automaticamente, eliminando erros de unknown. Código + seguro / legível.
+- [x] Compatibilidade total com Relay Compiler: corrigidos todos os problemas de geração de artefatos, warnings e erros de schema
+- [x] Correção do tipo de transação: Campo value de Transaction agora é Float no schema GraphQL, garantindo consistência entre backend e frontend
+- [x] Refatoração de TransactionList: Aceita agora arrays readonly (alinhando com os tipos gerados pelo Relay)
+
 ---
 
 ## In Progress
 
+- [ ] adicionar cobertura de testes para o frontend
+
 ## Next Tasks
-- [] adicionar cobertura de testes para o frontend
-- [] Dockerfile para ambiente local
-- [] Paginação real com after / cursor
+- [ ] Dockerfile para ambiente local
 
 ---
 
@@ -177,5 +184,5 @@ Extras:
 - [x] Subscription para Transaction adicionada
 - [x] Testes unitários com Jest
 - [x] Arquivo `.graphql` ou `.http` com queries de exemplo
+- [x] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
 - [ ] Dockerfile + docker-compose.yml para ambiente local
-- [ ] Paginação real com `after`, `cursor` funcional para Accounts e Transactions

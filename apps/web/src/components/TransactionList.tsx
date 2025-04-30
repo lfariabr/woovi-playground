@@ -12,7 +12,7 @@ interface TransactionNode {
 }
 
 interface TransactionListProps {
-  transactions: { node: TransactionNode }[];
+  transactions: ReadonlyArray<{ node: TransactionNode }>;
 }
 
 export default function TransactionList({ transactions }: TransactionListProps) {
