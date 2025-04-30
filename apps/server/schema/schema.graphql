@@ -143,10 +143,24 @@ type TransactionEdge {
   cursor: String!
 }
 
+input TransferInput {
+  value: Int!
+  senderAccountId: String!
+  receiverAccountId: String!
+  idempotencyKey: String!
+  createdAt: String
+  clientMutationId: String
+}
+
+type TransferPayload {
+  transaction: Transaction
+  clientMutationId: String
+}
+
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
   AccountAdd(input: AccountAddInput!): AccountAddPayload
-  createTransaction(input: TransactionAddInput!): TransactionAddPayload
+  createTransaction(input: TransferInput!): TransferPayload
 }
 
 type MessageAddPayload {
@@ -168,19 +182,6 @@ input AccountAddInput {
   accountNumber: String!
   balance: Float!
   userTaxId: String!
-  clientMutationId: String
-}
-
-type TransactionAddPayload {
-  transaction: Transaction
-  clientMutationId: String
-}
-
-input TransactionAddInput {
-  value: Int!
-  senderAccountId: String!
-  receiverAccountId: String!
-  idempotencyKey: String!
   clientMutationId: String
 }
 

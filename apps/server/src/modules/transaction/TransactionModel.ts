@@ -7,6 +7,7 @@ const Schema = new mongoose.Schema<ITransaction>(
     idempotentKey: {
       type: String,
       required: true,
+      unique: true,
     },
     senderAccountId: {
       type: mongoose.Types.ObjectId,
@@ -36,10 +37,10 @@ const Schema = new mongoose.Schema<ITransaction>(
   }
 );
 
-// Ensure idempotency per sender
+// Ensuring idempotency per sender
 Schema.index({ senderAccountId: 1, idempotentKey: 1 }, { unique: true });
 
-// Adding a pre-save hook to enforce sender balance check
+// Adding a pre-save hook to enforce sender's balance check
 Schema.pre('save', async function (next) {
   const transaction = this as any;
   try {
