@@ -24,12 +24,12 @@ const TransactionsAdminCheckpointPage = () => {
           size="small"
           sx={{ mr: 2 }}
         />
-        <Button
+        <Button 
           variant="contained"
           onClick={() => setQueryAccountId(accountId)}
-          disabled={!accountId}
+          disabled={!accountId.trim()}
         >
-          Load Account
+          LOAD ACCOUNT
         </Button>
       </Box>
 

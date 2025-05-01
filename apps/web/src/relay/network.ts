@@ -47,7 +47,8 @@ function createNetwork() {
  * https://relay.dev/docs/en/quick-start-guide#relay-environment.
  */
 
-const GRAPHQL_ENPOINT = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT as string;
+// Use relative path to leverage Next.js rewrites for Docker Compose
+const GRAPHQL_ENPOINT = "/graphql";
 
 async function networkFetch(
 	params: RequestParameters,

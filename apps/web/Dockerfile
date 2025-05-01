@@ -2,35 +2,45 @@
 FROM node:20-alpine AS builder
 WORKDIR /repo
 
-# 1. Copia todos os arquivos necessários do monorepo antes do install
-COPY pnpm-lock.yaml package.json turbo.json pnpm-workspace.yaml ./
-COPY apps/web ./apps/web
+# Copy package files and install dependencies
+COPY package.json turbo.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY apps/web/package.json ./apps/web/
 COPY packages ./packages
-
-# 2. Instala pnpm e dependências
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-# 3. Copia todo o projeto para o builder
+# Copy source code and build
 COPY . .
-
-# 4. Builda só o web app
 RUN pnpm --filter @woovi-playground/web... build
 
 # --- Runtime stage ---
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-# 5. Copia build standalone do Next.js
-COPY --from=builder /repo/apps/web/.next/standalone ./
-COPY --from=builder /repo/apps/web/.next/static .next/static
-COPY --from=builder /repo/apps/web/public ./public
+# Set environment variables
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# 6. Copia node_modules do root e do app (resolve react/jsx-runtime)
-COPY --from=builder /repo/node_modules ./node_modules
-COPY --from=builder /repo/apps/web/node_modules ./apps/web/node_modules
+# Install production dependencies in runtime image
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/web/package.json ./apps/web/
+RUN npm install -g pnpm && pnpm install --prod --frozen-lockfile
 
-# 7. Adiciona variáveis de ambiente se quiser
-# COPY apps/web/.env .env
+# Copy standalone output to /app
+COPY --from=builder /repo/apps/web/.next/standalone/ /app/
 
+# Copy the full .next directory (for BUILD_ID and other runtime artifacts)
+COPY --from=builder /repo/apps/web/.next /app/apps/web/.next
+
+# Ensure public directory exists
+RUN mkdir -p /app/apps/web/public
+
+# Copy static + public files to proper absolute paths
+COPY --from=builder /repo/apps/web/.next/static /app/.next/static
+COPY --from=builder /repo/apps/web/public /app/apps/web/public
+
+# Copy server.js to the correct location expected by the CMD
+COPY --from=builder /repo/apps/web/.next/standalone/server.js /app/apps/web/server.js
+
+# Expose port and start server
 EXPOSE 3000
 CMD ["node", "apps/web/server.js"]

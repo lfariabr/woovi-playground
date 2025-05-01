@@ -180,11 +180,27 @@ docker-compose build --no-cache
 docker-compose up
 ```
 
+### tag v1.15.0: feature/css-at-docker
+- [x] Refatoração do Dockerfile do frontend para Next.js standalone:
+  - Copiados explicitamente `.next/standalone`, `.next/static`, `public` e `server.js` para os paths esperados no container.
+  - Garantia de build consistente para SSR, assets e CSS.
+- [x] Ajuste no `next.config.js`:
+  - Adicionado rewrites para proxy transparente de `/graphql` para o backend no Docker Compose.
+- [x] Refatoração do fetch GraphQL (`network.ts`):
+  - Endpoint agora sempre relativo (`/graphql`), funcionando para SSR e client-side sem depender de env.
+- [x] Ajuste do endpoint de subscriptions (WebSocket):
+  - `.env` atualizado para usar `ws://localhost:4000/graphql/ws`, permitindo conexão do browser local ao backend no container.
+- [x] Testes e validação do fluxo admin:
+  - Busca de transações funcionando via proxy, sem erros de DNS ou endpoint.
+  - Documentação prática criada em `_challenge/docker.md` com guia passo a passo para conteinerização Next.js.
+- [x] Correções menores: `.gitignore` atualizado para versionar `.env` local, inclusão de `_document.tsx` para garantir CSS/estilos.
+
 ---
 
 ## In Progress
 
 ## Next Tasks
+
 - [ ] adicionar cobertura de testes para o frontend
 - [ ] criar uma tela para realizar transações (simulando login na conta numero 1)
 
