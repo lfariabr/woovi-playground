@@ -5,7 +5,9 @@
 	"scripts": {
 		"config:local": "cp .env.example .env",
 		"dev": "tsx watch src/index.ts",
-		"schema": "tsx scripts/updateSchema.ts && cp schema/schema.graphql ../web/data"
+		"schema": "tsx scripts/updateSchema.ts && cp schema/schema.graphql ../web/data",
+		"start": "node dist/index.js",
+		"build": "pnpm exec tsc"
 	},
 	"dependencies": {
 		"@entria/graphql-mongo-helpers": "^1.1.2",
@@ -33,7 +35,14 @@
 		"@types/koa-bodyparser": "^4.3.10",
 		"@types/koa-logger": "^3.1.5",
 		"@types/koa-router": "^7.4.8",
-		"@types/node": "^17.0.12",
-		"tsx": "^3.12.6"
-	}
+		"@types/node": "^20.0.0",
+		"tsx": "^3.12.6",
+		"typescript": "^5.4.0"
+	},
+  "pnpm": {
+    "overrides": {
+      "@types/node": "^20.0.0",
+      "typescript": "^5.4.0"
+    }
+  }
 }

@@ -1,17 +1,34 @@
 import { Box, Typography, Select, MenuItem, Button } from '@mui/material';
 import { graphql, useLazyLoadQuery, usePaginationFragment, useSubscription } from 'react-relay';
-import TransactionList from './TransactionList';
+import TransactionList, { TransactionNode } from './TransactionList';
 import styles from '../styles/AccountSection.module.css';
-import type { AccountSectionQuery } from '../__generated__/AccountSectionQuery.graphql';
+import type { AccountSectionQuery as AccountSectionQueryType } from '../__generated__/AccountSectionQuery.graphql';
 import type { AccountSectionFragment$key } from '../__generated__/AccountSectionFragment.graphql';
 import type { AccountSectionPaginationQuery } from '../__generated__/AccountSectionPaginationQuery.graphql';
-import { formatCurrency } from '../helpers/formatter';
 
 // Inline GraphQL definitions (replicando fluxo Message)
-const AccountSectionQuery = graphql`
-  query AccountSectionQuery($id: ID!, $first: Int) {
+const accountSectionQueryDocument = graphql`
+  query AccountSectionQuery($id: ID!, $first: Int!) {
     account(id: $id) {
-      ...AccountSectionFragment @arguments(first: $first)
+      id
+      name
+      balance
+      transactions(first: $first) {
+        edges {
+          node {
+            id
+            value
+            createdAt
+            senderAccountId
+            description
+            type
+          }
+        }
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+        }
+      }
     }
   }
 `;
@@ -32,7 +49,6 @@ const AccountSectionFragment = graphql`
           value
           createdAt
           senderAccountId
-          receiverAccountId
           description
           type
         }
@@ -57,7 +73,6 @@ const AccountSectionSubscription = graphql`
         value
         createdAt
         senderAccountId
-        receiverAccountId
         description
         type
       }
@@ -72,7 +87,11 @@ interface AccountSectionProps {
 }
 
 export default function AccountSection({ accountId, pageSize, setPageSize }: AccountSectionProps) {
-  const data = useLazyLoadQuery<AccountSectionQuery>(AccountSectionQuery, { id: accountId, first: pageSize }, { fetchKey: pageSize });
+  const data = useLazyLoadQuery<AccountSectionQueryType>(
+    accountSectionQueryDocument,
+    { id: accountId, first: pageSize },
+    { fetchKey: pageSize }
+  );
   const {
     data: accountData,
     loadNext,
@@ -91,12 +110,17 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
     },
   });
 
+  // Filtro defensivo para só passar transações válidas
+  const safeEdges = accountData.transactions.edges.filter(
+    edge => edge.node.type === 'SENT' || edge.node.type === 'RECEIVED'
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.sectionHeader}>Account Details</div>
       <Box className={styles.accountSectionHeader}>
         <Typography variant="h6" className={styles.accountSectionName}>Account: {accountData.name}</Typography>
-        <Typography variant="subtitle1" className={styles.accountSectionBalance}>Balance: {formatCurrency(accountData.balance)}</Typography>
+        <Typography variant="subtitle1" className={styles.accountSectionBalance}>Balance: R$ {accountData.balance}</Typography>
       </Box>
       <Box>
         <Box className={styles.transactionsHeader}>
@@ -110,9 +134,7 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
             <MenuItem value={10}>10</MenuItem>
           </Select>
         </Box>
-        <TransactionList
-          transactions={accountData.transactions.edges}
-        />
+        <TransactionList transactions={safeEdges as { node: TransactionNode }[]} />
         <Box className={styles.pagination}>
           <Button
             variant="outlined"

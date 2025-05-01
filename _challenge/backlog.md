@@ -156,14 +156,37 @@ Extras:
 - [x] Correção do tipo de transação: Campo value de Transaction agora é Float no schema GraphQL, garantindo consistência entre backend e frontend
 - [x] Refatoração de TransactionList: Aceita agora arrays readonly (alinhando com os tipos gerados pelo Relay)
 
+
+### tag v1.13.0: feature/refactor-transaction-decimal
+- [x] Refatoração completa do tratamento de valores monetários para usar Decimal128 no backend, garantindo precisão em todas as operações 
+- [x] Alteração do campo value de Transaction para Float no schema GraphQL, alinhando backend e frontend e eliminando problemas de serialização
+- [x] Ajuste das queries, mutations e modelos para suportar valores decimais de forma segura e consistente
+- [x] Atualização do frontend para exibir corretamente valores positivos (recebidos) e negativos (enviados) nas transações, com formatação padronizada
+- [x] Criação do helper formatter.tsx para padronizar exibição de datas e valores no frontend
+- [x] Melhoria na UX na página de admin, exibindo saldos e transações formatados
+- [x] Correção e atualização de todos os testes (unitários e integração) para cobrir o novo fluxo decimal
+
+### tag v1.14.0: feature/dockerfile
+- [x] Criei `Dockerfile` para web e outro para o server
+- [x] Criei `docker-compose.yml` para rodar o ambiente local
+- [x] Criei `.dockerignore` para ignorar arquivos e pastas inúteis na imagem
+- [x] Atualizei dependências do `package.json`, `tsconfig.json` e `pnpm-lock.yaml`
+- [x] Validei o build Docker das aplicações até o boot do app em ambiente containerizado
+> Observação: O CSS do Next.js standalone não está carregando devido a um detalhe de assets, mas a entrega principal (infraestrutura Docker pronta e funcional) está concluída. Tratar assets na próxima task.
+Ref: https://nextjs.org/docs/pages/api-reference/config/next-config-js/output#automatically-copying-traced-files
+```Docker commands
+docker builder prune -f
+docker-compose build --no-cache
+docker-compose up
+```
+
 ---
 
 ## In Progress
 
-- [ ] adicionar cobertura de testes para o frontend
-
 ## Next Tasks
-- [ ] Dockerfile para ambiente local
+- [ ] adicionar cobertura de testes para o frontend
+- [ ] criar uma tela para realizar transações (simulando login na conta numero 1)
 
 ---
 
@@ -185,4 +208,4 @@ Extras:
 - [x] Testes unitários com Jest
 - [x] Arquivo `.graphql` ou `.http` com queries de exemplo
 - [x] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
-- [ ] Dockerfile + docker-compose.yml para ambiente local
+- [x] Dockerfile + docker-compose.yml para ambiente local

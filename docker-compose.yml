@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   mongodb:
@@ -16,3 +16,38 @@ services:
     ports:
       - "6379:6379"
     restart: always
+
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    container_name: server
+    depends_on:
+      - mongodb
+      - redis
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URL=mongodb://mongodb:27017/woovi-playground
+      - REDIS_URL=redis://redis:6379
+    restart: unless-stopped
+    # Adicione volumes para hot reload (opcional)
+    # volumes:
+    #   - ./apps/server:/app/apps/server
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: web
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    # Adicione volumes para hot reload (opcional)
+    # volumes:
+    #   - ./apps/web:/app/apps/web

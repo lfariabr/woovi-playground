@@ -1,5 +1,14 @@
 {
-    "compilerOptions": {
-      "esModuleInterop": true
-    }
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "ES2015",
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/__tests__/**"
+  ],
+  "include": ["src"]
 }

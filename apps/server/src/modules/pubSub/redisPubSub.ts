@@ -1,7 +1,7 @@
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 export const redisPubSub = new RedisPubSub({
-	connection: process.env.REDIS_HOST,
+	connection: process.env.REDIS_URL,
 });
 
 // console.log('Connecting to Redis:', {

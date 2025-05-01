@@ -1,37 +1,265 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="11" failures="0" errors="0" time="5.803">
-  <testsuite name="AccountQuery" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.195" tests="1">
-    <testcase classname="AccountQuery should find account by accountNumber" name="AccountQuery should find account by accountNumber" time="0.02">
+<testsuites name="jest tests" tests="11" failures="11" errors="0" time="25.986">
+  <testsuite name="AccountMutation" errors="0" failures="1" skipped="0" timestamp="2025-05-01T02:59:08" time="18.197" tests="1">
+    <testcase classname="AccountMutation should update account balance" name="AccountMutation should update account balance" time="5.056">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountMutation.test.ts:8:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountMutation.test.ts:5:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountMutation.test.ts:21:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountMutation.test.ts:5:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="AccountMutation" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.228" tests="1">
-    <testcase classname="AccountMutation should update account balance" name="AccountMutation should update account balance" time="0.015">
+  <testsuite name="TransactionQuery" errors="0" failures="1" skipped="0" timestamp="2025-05-01T02:59:08" time="18.23" tests="1">
+    <testcase classname="TransactionQuery should find transaction by idempotentKey" name="TransactionQuery should find transaction by idempotentKey" time="5.008">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionQuery.test.ts:9:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionQuery.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionQuery.test.ts:23:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionQuery.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="AccountModel" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.286" tests="3">
-    <testcase classname="AccountModel should create and retrieve an account" name="AccountModel should create and retrieve an account" time="0.017">
-    </testcase>
-    <testcase classname="AccountModel should not create an account with duplicate userTaxId" name="AccountModel should not create an account with duplicate userTaxId" time="0.017">
-    </testcase>
-    <testcase classname="AccountModel should not create an account with duplicate accountNumber" name="AccountModel should not create an account with duplicate accountNumber" time="0.003">
+  <testsuite name="AccountQuery" errors="0" failures="1" skipped="0" timestamp="2025-05-01T02:59:08" time="18.26" tests="1">
+    <testcase classname="AccountQuery should find account by accountNumber" name="AccountQuery should find account by accountNumber" time="5.007">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountQuery.test.ts:8:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountQuery.test.ts:5:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountQuery.test.ts:21:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountQuery.test.ts:5:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="TransactionQuery" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.317" tests="1">
-    <testcase classname="TransactionQuery should find transaction by idempotentKey" name="TransactionQuery should find transaction by idempotentKey" time="0.022">
+  <testsuite name="TransactionModel" errors="0" failures="2" skipped="0" timestamp="2025-05-01T02:59:08" time="21.491" tests="2">
+    <testcase classname="TransactionModel should require all mandatory fields" name="TransactionModel should require all mandatory fields" time="5.007">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionModel.test.ts:7:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionModel.test.ts:20:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="TransactionModel should not allow non-numeric value" name="TransactionModel should not allow non-numeric value" time="2.994">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionModel.test.ts:7:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="TransactionModel" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.312" tests="2">
-    <testcase classname="TransactionModel should require all mandatory fields" name="TransactionModel should require all mandatory fields" time="0.008">
+  <testsuite name="TransactionMutation" errors="0" failures="3" skipped="0" timestamp="2025-05-01T02:59:08" time="21.504" tests="3">
+    <testcase classname="TransactionMutation should not create a transaction if account sender has no balance" name="TransactionMutation should not create a transaction if account sender has no balance" time="5.006">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:9:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:23:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="TransactionModel should not allow non-numeric value" name="TransactionModel should not allow non-numeric value" time="0.002">
+    <testcase classname="TransactionMutation should not create a transaction with duplicate idempotentKey" name="TransactionMutation should not create a transaction with duplicate idempotentKey" time="3.056">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:9:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="TransactionMutation should not create a transaction with duplicate receiverAccountId" name="TransactionMutation should not create a transaction with duplicate receiverAccountId" time="0.002">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:9:3
+    at _dispatchDescribe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/transactions/TransactionMutation.test.ts:6:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="TransactionMutation" errors="0" failures="0" skipped="0" timestamp="2025-04-30T22:44:17" time="5.345" tests="3">
-    <testcase classname="TransactionMutation should not create a transaction if account sender has no balance" name="TransactionMutation should not create a transaction if account sender has no balance" time="0.014">
+  <testsuite name="AccountModel" errors="0" failures="3" skipped="0" timestamp="2025-05-01T02:59:08" time="24.908" tests="3">
+    <testcase classname="AccountModel should create and retrieve an account" name="AccountModel should create and retrieve an account" time="5.008">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountModel.test.ts:7:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountModel.test.ts:20:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="TransactionMutation should not create a transaction with duplicate idempotentKey" name="TransactionMutation should not create a transaction with duplicate idempotentKey" time="0.006">
+    <testcase classname="AccountModel should not create an account with duplicate userTaxId" name="AccountModel should not create an account with duplicate userTaxId" time="5.021">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountModel.test.ts:7:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountModel.test.ts:20:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="TransactionMutation should not create a transaction with duplicate receiverAccountId" name="TransactionMutation should not create a transaction with duplicate receiverAccountId" time="0.005">
+    <testcase classname="AccountModel should not create an account with duplicate accountNumber" name="AccountModel should not create an account with duplicate accountNumber" time="1.427">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a hook.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at Object.&lt;anonymous&gt; (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/apps/server/src/__tests__/accounts/AccountModel.test.ts:7:1)
+    at Runtime._execModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runTestInternal (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/luisfaria/Desktop/sEngineer/woovi/woovi-playground/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
 </testsuites>

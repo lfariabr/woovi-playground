@@ -1,0 +1,36 @@
+# Ignore node_modules everywhere
+**/node_modules
+
+# Ignore build outputs
+**/dist
+**/build
+**/.next
+**/.turbo
+
+# Ignore logs and temp files
+*.log
+tmp
+temp
+
+# Ignore git and editor files
+.git
+.gitignore
+*.swp
+*.swo
+
+# Ignore local env files
+.env
+.env.*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore coverage
+coverage
+**/coverage
+
+# Ignore lockfiles from other package managers
+package-lock.json
+yarn.lock
+pnpm-debug.log

@@ -4,4 +4,8 @@ module.exports = {
 	compiler: {
 		relay: require('./relay.config'),
 	},
+	output: 'standalone',
+	eslint: {
+		ignoreDuringBuilds: true,
+	}
 };

@@ -2,7 +2,7 @@ import { Box, Typography, Chip } from '@mui/material';
 import styles from '../styles/TransactionList.module.css';
 import { formatDate } from '../helpers/formatter';
 
-interface TransactionNode {
+export interface TransactionNode {
   id: string;
   value: number;
   createdAt: string;

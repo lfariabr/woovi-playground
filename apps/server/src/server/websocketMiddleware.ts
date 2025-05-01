@@ -22,8 +22,13 @@ export const createWebsocketMiddleware = (
 			return server;
 		}
 
+		// Fix the type error: options can be anything, but we want an object that might have wsOptions
+		const wsOpts = (typeof options === 'object' && options !== null && 'wsOptions' in options)
+			? (options as { wsOptions?: WebSocket.ServerOptions }).wsOptions
+			: undefined;
+
 		const newServer = new WebSocketServer({
-			...(options.wsOptions || {}),
+			...(wsOpts || {}),
 			noServer: true,
 		});
 
