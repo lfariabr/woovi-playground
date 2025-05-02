@@ -9,7 +9,6 @@ export interface TransactionNode {
   senderAccountId: string;
   receiverAccountId?: string;
   sender?: string;
-  description?: string;
   type?: 'SENT' | 'RECEIVED';
 }
 
@@ -50,11 +49,6 @@ export default function TransactionList({ transactions }: TransactionListProps) 
             <Typography variant="caption" display="block">
               Data: {formatDate(node.createdAt)}
             </Typography>
-            {node.description && (
-              <Typography variant="caption" display="block">
-                Descrição: {node.description}
-              </Typography>
-            )}
             {isNegative ? (
               <Typography variant="caption" display="block">
                 Para: {node.receiverAccountId || 'N/A'}

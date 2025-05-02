@@ -95,10 +95,10 @@ export default function CreateTransaction({ accountId, accountNumber, onTransact
       const clientMutationId = "frontend";
       
       const input = {
-        value: parseFloat(amount),
+        value: String(parseFloat(amount)), // Converter para string conforme esperado pelo GraphQL
         senderAccountId: accountId,
         receiverAccountId: receiverId,
-        description: description || 'Transferência via frontend',
+        // Removendo o campo description que não está definido no tipo TransferInput
         idempotencyKey,
         clientMutationId,
       };

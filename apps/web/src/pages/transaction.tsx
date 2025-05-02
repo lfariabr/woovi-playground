@@ -1,7 +1,7 @@
 import { useState, Suspense } from 'react';
 import { Box, Typography, CircularProgress, TextField, Button } from '@mui/material';
 import AccountSection from '../components/AccountSection';
-// TODO
+
 export default function TransactionPage() {
   const [accountId, setAccountId] = useState('');
   const [pageSize, setPageSize] = useState(5);

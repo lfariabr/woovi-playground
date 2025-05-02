@@ -109,10 +109,10 @@ query {
 # Add an account
 mutation {
   AccountAdd(input: {
-    accountNumber: "11"
+    accountNumber: "1"
     balance: 1000
-    userTaxId: "TAX1234567"
-    name: "Conta Principal"
+    userTaxId: "1"
+    name: "Conta 1"
     clientMutationId: "test"
   }) {
     account {

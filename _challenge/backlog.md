@@ -216,13 +216,19 @@ docker-compose up
 - [x] Resolvido problema de tipos no TypeScript para permitir manipulação correta dos dados de transação
 - [x] Corrigido para exibir corretamente transações enviadas e recebidas com seus respectivos sinais
 
+### tag v1.19.0: feature/frontend-error-message
+- [ ] Corrigir a tela de frontend dando um erro se Account não encontrada
+- [ ] Corrigir transação não exibida em tempo real no frontend
+```Docker commands used
+docker-compose build web
+docker-compose up -d
+```
+
 ---
 
 ## In Progress
 
 ## Next Tasks
-- [ ] Corrigir a tela de frontend dando um erro se Account não encontrada
-- [ ] Corrigir transação não exibida em tempo real no frontend
 - [ ] Subir ambiente final Railway
 - [ ] Adicionar as releases no github 
 
