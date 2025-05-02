@@ -6,13 +6,14 @@ import type { AccountSectionQuery as AccountSectionQueryType } from '../__genera
 import type { AccountSectionFragment$key } from '../__generated__/AccountSectionFragment.graphql';
 import type { AccountSectionPaginationQuery } from '../__generated__/AccountSectionPaginationQuery.graphql';
 
-// Inline GraphQL definitions (replicando fluxo Message)
+// Inline GraphQL definitions (replicating out of Message original component)
 const accountSectionQueryDocument = graphql`
   query AccountSectionQuery($id: ID!, $first: Int!) {
     account(id: $id) {
       id
       name
       balance
+      _id
       transactions(first: $first) {
         edges {
           node {
@@ -41,6 +42,7 @@ const AccountSectionFragment = graphql`
     )
     @refetchable(queryName: "AccountSectionPaginationQuery")
   {
+    _id
     transactions(first: $first, after: $after) @connection(key: "Account_transactions") {
       __id
       edges {
@@ -110,7 +112,7 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
     },
   });
 
-  // Filtro defensivo para só passar transações válidas
+  // Defensive filter to pass only valid transactions
   const safeEdges = accountData.transactions.edges.filter(
     edge => edge.node.type === 'SENT' || edge.node.type === 'RECEIVED'
   );
@@ -134,7 +136,17 @@ export default function AccountSection({ accountId, pageSize, setPageSize }: Acc
             <MenuItem value={10}>10</MenuItem>
           </Select>
         </Box>
-        <TransactionList transactions={safeEdges as { node: TransactionNode }[]} />
+        {/* Calcula o type da transação dinamicamente */}
+        {/* Usa o _id do MongoDB para comparar */}
+        <TransactionList 
+          transactions={safeEdges.map(({ node, ...rest }) => ({
+            node: {
+              ...node,
+              type: node.senderAccountId === data.account._id ? 'SENT' : 'RECEIVED',
+            },
+            ...rest,
+          })) as { node: TransactionNode }[]} 
+        />
         <Box className={styles.pagination}>
           <Button
             variant="outlined"

@@ -65,3 +65,9 @@ Run all: pnpm dev
 Run backend: pnpm dev --filter ./apps/server
 GraphQL env: http://localhost:4000/graphql
 Frontend env: http://localhost:3000
+
+docker-compose exec mongodb mongosh
+use woovi-playground
+db.Account.find().pretty()
+db.Transactions.find().pretty()
+

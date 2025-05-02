@@ -49,7 +49,13 @@ const AccountType = new GraphQLObjectType<IAccount>({
 			type: TransactionConnection,
 			args: connectionArgs,
 			resolve: async (account, args, context) => {
-				const transactions = await context.transactionsByAccountIdLoader.load(account._id.toString());
+				const accountId = account._id.toString();
+				const transactions = await context.models.Transaction.find({
+					$or: [
+						{ senderAccountId: accountId },
+						{ receiverAccountId: accountId }
+					]
+				}).sort({ createdAt: -1 });
 				return connectionFromArray(transactions, args);
 			},
 		},

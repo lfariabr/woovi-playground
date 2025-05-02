@@ -200,10 +200,18 @@ docker-compose up
 - [x] Acessar `/woovi-playground/apps/web` e executar `pnpm test`
 - [x] No caso do server, continua sendo `npx jest --clearCache` e `npx jest` no `root`
 
+### tag v1.17.0: feature/frontend-transaction
+- [x] Criar tela para realizar transações
+- [x] Implementar lógica de transação no frontend
+- [x] Testar transações no frontend
+- [x] Criar script para limpar o banco de dados em `apps/server/scripts/clear-db.js`
+- [x] Ajuste do Transaction Schema tratando idempotentKey, senderAccountId e receiverAccountId como unique:true (removido)
+
 ---
 
 ## In Progress
-- [ ] Criar uma tela para realizar transações (simulando login na conta numero 1)
+- [ ] TODO: diagnosticar o pq a transacao negativa nao exibe / cache no frontend?
+- [ ] TODO: corrigir a tela de frontend dando um erro PRETO se acc nao encontrada 
 
 ## Next Tasks
 - [ ] Subir ambiente final Railway

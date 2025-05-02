@@ -13,13 +13,13 @@ const Schema = new mongoose.Schema<ITransaction>(
       type: mongoose.Types.ObjectId,
       ref: "Account",
       required: true,
-      unique: true,
+      // unique: true,
     },
     receiverAccountId: {
       type: mongoose.Types.ObjectId,
       ref: "Account",
       required: true,
-      unique: true,
+      // unique: true,
     },
     createdAt: {
       type: Date,
