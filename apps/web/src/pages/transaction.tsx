@@ -1,8 +1,7 @@
 import { useState, Suspense } from 'react';
 import { Box, Typography, CircularProgress, TextField, Button } from '@mui/material';
 import AccountSection from '../components/AccountSection';
-import CreateTransaction from '../components/CreateTransaction';
-
+// TODO
 export default function TransactionPage() {
   const [accountId, setAccountId] = useState('');
   const [pageSize, setPageSize] = useState(5);
@@ -35,11 +34,8 @@ export default function TransactionPage() {
           <Suspense fallback={<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}><CircularProgress /><Typography sx={{ ml: 2 }}>Loading…</Typography></Box>}>
             <AccountSection
               accountId={queryAccountId}
-              pageSize={pageSize}
-              setPageSize={setPageSize}
             />
           </Suspense>
-          <CreateTransaction accountId={queryAccountId} />
         </>
       )}
     </main>

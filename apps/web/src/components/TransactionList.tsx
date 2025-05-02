@@ -25,43 +25,48 @@ export default function TransactionList({ transactions }: TransactionListProps) 
           Nenhuma transação encontrada
         </Typography>
       )}
-      {transactions.map(({ node }) => (
-        <Box 
-          key={node.id} 
-          className={`${styles.transactionItem} ${
-            node.type === 'SENT' ? styles.transactionSent : styles.transactionReceived
-          }`}
-        >
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography variant="body2">
-              {node.type === 'SENT' ? '-' : '+'}{node.value}
+      {transactions.map(({ node }) => {
+        const isNegative = node.type === 'SENT' || node.value < 0;
+        const displayValue = Math.abs(node.value);
+        
+        return (
+          <Box 
+            key={node.id} 
+            className={`${styles.transactionItem} ${
+              isNegative ? styles.transactionSent : styles.transactionReceived
+            }`}
+          >
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                {isNegative ? '-' : '+'}{displayValue}
+              </Typography>
+              <Chip 
+                label={isNegative ? 'Enviado' : 'Recebido'} 
+                size="small"
+                color={isNegative ? 'error' : 'success'}
+                variant="outlined"
+              />
+            </Box>
+            <Typography variant="caption" display="block">
+              Data: {formatDate(node.createdAt)}
             </Typography>
-            <Chip 
-              label={node.type === 'SENT' ? 'Enviado' : 'Recebido'} 
-              size="small"
-              color={node.type === 'SENT' ? 'error' : 'success'}
-              variant="outlined"
-            />
+            {node.description && (
+              <Typography variant="caption" display="block">
+                Descrição: {node.description}
+              </Typography>
+            )}
+            {isNegative ? (
+              <Typography variant="caption" display="block">
+                Para: {node.receiverAccountId || 'N/A'}
+              </Typography>
+            ) : (
+              <Typography variant="caption" display="block">
+                De: {node.senderAccountId || 'N/A'}
+              </Typography>
+            )}
           </Box>
-          <Typography variant="caption" display="block">
-            Data: {formatDate(node.createdAt)}
-          </Typography>
-          {node.description && (
-            <Typography variant="caption" display="block">
-              Descrição: {node.description}
-            </Typography>
-          )}
-          {node.type === 'SENT' ? (
-            <Typography variant="caption" display="block">
-              Para: {node.receiverAccountId || 'N/A'}
-            </Typography>
-          ) : (
-            <Typography variant="caption" display="block">
-              De: {node.senderAccountId || 'N/A'}
-            </Typography>
-          )}
-        </Box>
-      ))}
+        );
+      })}
     </Box>
   );
 }
