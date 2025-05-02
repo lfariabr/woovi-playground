@@ -195,14 +195,19 @@ docker-compose up
   - Documentação prática criada em `_challenge/docker.md` com guia passo a passo para conteinerização Next.js.
 - [x] Correções menores: `.gitignore` atualizado para versionar `.env` local, inclusão de `_document.tsx` para garantir CSS/estilos.
 
+### tag v1.16.0: feature/frontend-tests
+- [x] Criar cobertura de testes para o frontend
+- [x] Acessar `/woovi-playground/apps/web` e executar `pnpm test`
+- [x] No caso do server, continua sendo `npx jest --clearCache` e `npx jest` no `root`
+
 ---
 
 ## In Progress
+- [ ] Criar uma tela para realizar transações (simulando login na conta numero 1)
 
 ## Next Tasks
-
-- [ ] adicionar cobertura de testes para o frontend
-- [ ] criar uma tela para realizar transações (simulando login na conta numero 1)
+- [ ] Subir ambiente final Railway
+- [ ] Adicionar as releases no github 
 
 ---
 
