@@ -207,13 +207,22 @@ docker-compose up
 - [x] Criar script para limpar o banco de dados em `apps/server/scripts/clear-db.js`
 - [x] Ajuste do Transaction Schema tratando idempotentKey, senderAccountId e receiverAccountId como unique:true (removido)
 
+### tag v1.18.0: feature/transaction-fix
+- [x] Diagnosticar e corrigir problema de exibição de transações no frontend:
+- [x] O problema estava relacionado ao cache do Relay que não atualizava automaticamente após novas transações
+- [x] Implementado sistema de eventos para notificar o frontend sobre novas transações (`transaction:created`)
+- [x] Adicionado `refreshTrigger` como `fetchKey` para forçar o Relay a recarregar dados
+- [x] Adicionado recarregamento da página após uma transação como solução temporária
+- [x] Resolvido problema de tipos no TypeScript para permitir manipulação correta dos dados de transação
+- [x] Corrigido para exibir corretamente transações enviadas e recebidas com seus respectivos sinais
+
 ---
 
 ## In Progress
-- [ ] TODO: diagnosticar o pq a transacao negativa nao exibe / cache no frontend?
-- [ ] TODO: corrigir a tela de frontend dando um erro PRETO se acc nao encontrada 
 
 ## Next Tasks
+- [ ] Corrigir a tela de frontend dando um erro se Account não encontrada
+- [ ] Corrigir transação não exibida em tempo real no frontend
 - [ ] Subir ambiente final Railway
 - [ ] Adicionar as releases no github 
 
