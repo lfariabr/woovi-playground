@@ -10,6 +10,12 @@ COPY packages ./packages
 # Copia o .env.example para o diretório raiz
 COPY apps/server/.env.example ./.env.example
 
+# Cria um arquivo .env para o dotenv-safe
+RUN echo "PORT=4000" > .env && \
+    echo "MONGO_URI=\${MONGO_URL:-mongodb://localhost/woovi-playground}" >> .env && \
+    echo "REDIS_HOST=\${REDIS_URL:-redis://localhost}" >> .env && \
+    echo "REDIS_URL=\${REDIS_URL:-redis://redis:6379}" >> .env
+
 # Instala pnpm e dependências de build
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
@@ -28,6 +34,12 @@ COPY packages ./packages
 
 # Copia o .env.example para o diretório raiz
 COPY apps/server/.env.example ./.env.example
+
+# Cria um arquivo .env para o dotenv-safe
+RUN echo "PORT=4000" > .env && \
+    echo "MONGO_URI=\${MONGO_URL:-mongodb://localhost/woovi-playground}" >> .env && \
+    echo "REDIS_HOST=\${REDIS_URL:-redis://localhost}" >> .env && \
+    echo "REDIS_URL=\${REDIS_URL:-redis://redis:6379}" >> .env
 
 # Instala apenas dependências de produção
 RUN npm install -g pnpm && pnpm install --prod --frozen-lockfile
