@@ -224,12 +224,15 @@ docker-compose build web
 docker-compose up -d
 ```
 
+### tag v1.20.0: feature/railway
+- [x] Subir ambiente final Railway backend
+
 ---
 
 ## In Progress
+- [ ] Subir ambiente final Railway frontend
 
 ## Next Tasks
-- [ ] Subir ambiente final Railway
 - [ ] Adicionar as releases no github 
 
 ---

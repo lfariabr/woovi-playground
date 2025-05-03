@@ -1,21 +1,52 @@
 # Dockerfile apps/server
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Copia arquivos essenciais do monorepo
+COPY pnpm-lock.yaml package.json turbo.json pnpm-workspace.yaml ./
+COPY apps/server/package.json ./apps/server/
+COPY packages ./packages
+
+# Copia o .env.example para o diretório raiz
+COPY apps/server/.env.example ./.env.example
+
+# Instala pnpm e dependências de build
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
+
+# Copia o código fonte e builda
+COPY apps/server ./apps/server
+RUN pnpm --filter @woovi-playground/server... build
+
+# Estágio de produção
 FROM node:20-alpine
 WORKDIR /app
 
 # Copia arquivos essenciais do monorepo
 COPY pnpm-lock.yaml package.json turbo.json pnpm-workspace.yaml ./
-COPY apps ./apps
+COPY apps/server/package.json ./apps/server/
 COPY packages ./packages
 
-# Copia o .env e .env.example do server para a raiz do container
-COPY apps/server/.env ./
-COPY apps/server/.env.example ./
+# Copia o .env.example para o diretório raiz
+COPY apps/server/.env.example ./.env.example
 
-# Instala pnpm e todas as dependências do monorepo
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# Instala apenas dependências de produção
+RUN npm install -g pnpm && pnpm install --prod --frozen-lockfile
 
-# Builda só o server (não roda build global)
-RUN pnpm --filter @woovi-playground/server... build
+# Copia os arquivos compilados do estágio de build
+COPY --from=builder /app/apps/server/dist ./apps/server/dist
+
+# Configura variáveis de ambiente para Railway
+ENV NODE_ENV=production
+ENV PORT=4000
+
+# Cria script de inicialização
+RUN echo '#!/bin/sh' > /app/start.sh && \
+    echo 'echo "PORT=4000" > .env' >> /app/start.sh && \
+    echo 'echo "MONGO_URI=$MONGO_URL" >> .env' >> /app/start.sh && \
+    echo 'echo "REDIS_HOST=$REDIS_URL" >> .env' >> /app/start.sh && \
+    echo 'echo "REDIS_URL=$REDIS_URL" >> .env' >> /app/start.sh && \
+    echo 'node apps/server/dist/index.js' >> /app/start.sh && \
+    chmod +x /app/start.sh
 
 EXPOSE 4000
-CMD ["node", "apps/server/dist/index.js"]
+CMD ["/app/start.sh"]
