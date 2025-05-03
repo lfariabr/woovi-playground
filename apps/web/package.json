@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"build": "next build",
+		"build": "relay-compiler && next build",
 		"config:local": "cp .env.example .env",
 		"dev": "next dev",
 		"lint": "next lint",
