@@ -1,7 +1,8 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = "npm install -g pnpm && pnpm install --frozen-lockfile && pnpm build"
+builder = "DOCKERFILE"
+dockerfilePath = "apps/server/Dockerfile"
+buildDirectory = "."
 
 [deploy]
-startCommand = "cd apps/server && node dist/index.js"
 restartPolicyType = "ON_FAILURE"
+numReplicas = 1
