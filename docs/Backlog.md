@@ -265,8 +265,8 @@ docker-compose up -d
 - [x] Dockerfile + docker-compose.yml para ambiente local
 
 ## Workflow:
-![Workflow](docs/workflow.jpeg)
+![Workflow](https://github.com/lfariabr/woovi-playground/blob/main/docs/workflow.jpeg)
 
 ## Railway:
-![RailwayFrontend](https://woovi-playground-app.up.railway.app/admin)
-![RailwayBackend](https://woovi-playground-server.up.railway.app/graphql)
+- Railway Frontend: https://woovi-playground-app.up.railway.app/admin
+- Railway Backend: https://woovi-playground-server.up.railway.app/graphql
