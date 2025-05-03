@@ -62,3 +62,10 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
 
 EXPOSE 4000
 CMD ["/app/start.sh"]
+
+# Testes Dockerfile no container local
+# docker run -p 4000:4000 \  -e NODE_ENV=production \
+#   -e PORT=4000 \
+#   -e MONGO_URL="mongodb://mongo:KlmSYztCoHUsLxYdFwvdnBYfEWZyLYoc@interchange.proxy.rlwy.net:44661" \
+#   -e REDIS_URL="redis://default:wThptmZKOPIPLvQPSEnnfICSPYCSLFYJ@shuttle.proxy.rlwy.net:13733" \
+#   woovi-server
