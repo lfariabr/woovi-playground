@@ -225,7 +225,8 @@ docker-compose up -d
 ```
 
 ### tag v1.20.0: feature/railway
-- [x] Subir ambiente final Railway backend
+- [x] Subir ambiente final Railway backend: https://woovi-playground-server.up.railway.app/graphql
+- [x] Criar arquivo `railway.toml` para configuração do Railway
 
 ---
 
