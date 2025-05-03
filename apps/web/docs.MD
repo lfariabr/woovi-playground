@@ -19,7 +19,6 @@ WORKDIR /app
 # Set environment variables
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
 
 # Install production dependencies in runtime image
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
