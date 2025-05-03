@@ -21,14 +21,20 @@ module.exports = {
 	},
 	// Proxy /graphql para o backend Docker Compose
 	async rewrites() {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://server:4000';
 		return [
 			{
 				source: '/graphql',
-				destination: 'http://server:4000/graphql',
+				destination: `${apiUrl}/graphql`,
 			},
 			{
 				source: '/graphql/:path*',
-				destination: 'http://server:4000/graphql/:path*',
+				destination: `${apiUrl}/graphql/:path*`,
+			},
+			// Adicionar rewrite para garantir que o healthcheck funcione
+			{
+				source: '/healthz',
+				destination: '/api/health',
 			},
 		];
 	},

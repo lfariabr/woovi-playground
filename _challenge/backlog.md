@@ -226,14 +226,17 @@ docker-compose up -d
 
 ### tag v1.20.0: feature/railway
 - [x] Subir ambiente final Railway backend: https://woovi-playground-server.up.railway.app/graphql
-- [x] Criar arquivo `railway.toml` para configuração do Railway
+- [x] Criar arquivo `railway.toml` na raiz do projeto para configuração do Railway Backend
+
+### tag v1.21.0: feature/railway-frontend
+- [x] Subir ambiente final Railway frontend: https://woovi-web-frontend-production.up.railway.app/admin
+- [x] Criar arquivo `railway.toml` na pasta `apps/web` para configuração do Railway exclusivo Frontend
+- [x] Error: Cannot find module '../../lib/get-network-host'
+
 
 ---
 
 ## In Progress
-- [ ] Subir ambiente final Railway frontend
-
-## Next Tasks
 - [ ] Adicionar as releases no github 
 
 ---

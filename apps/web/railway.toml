@@ -1,7 +1,7 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm install -g pnpm && pnpm install --frozen-lockfile && pnpm relay && pnpm build"
+buildCommand = "cd /app && mkdir -p apps/web/src/__generated__ && corepack enable && corepack pnpm install --frozen-lockfile --workspace-root && corepack pnpm relay && corepack pnpm --filter @woovi-playground/web build"
 
 [deploy]
-startCommand = "node .next/standalone/server.js"
+startCommand = "cd /app && NODE_ENV=production PORT=3000 pnpm --filter @woovi-playground/web start"
 restartPolicyType = "ON_FAILURE"
