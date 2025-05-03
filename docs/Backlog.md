@@ -6,9 +6,8 @@
 - [x] Criar branch `feat/crud-bank-relay`
 - [x] Forkar repositório e configurar Git remoto
 - [x] Criar estrutura de **Account** seguindo o padrão do `Message`:
-- [x] `AccountModel.ts` / `AccountType.ts` / `AccountLoader.ts` / `accountFields.ts`
+- [x] `AccountModel.ts` / `AccountType.ts` / `AccountLoader.ts` / `accountFields.ts` / `AccountAddMutation.ts`
 - [x] Criar mutations para Account:
-- [x] `AccountAddMutation.ts`
 - [x] Criar conexão Relay (`AccountConnection`)
 - [x] Implementar paginação estilo Relay para Accounts
 - [x] Criar `_challenge/` folder para documentação
@@ -36,7 +35,7 @@
 - [x] Criar tag `v1.2.0` da entrega
 
 ### tag v1.3.0: feature/techstack
-- [x] Criar `techstack.md`[_challenge/techstack.md](https://github.com/lfariabr/woovi-playground/tree/main/_challenge/techstack.md)
+- [x] Criar `techstack.md`[docs/ProjectTechStack.md](https://github.com/lfariabr/woovi-playground/tree/main/docs/ProjectTechStack.md)
 - [x] Atualizar backlog com as atualizações dos últimos 2 dias
 
 ### tag v1.4.0: feature/transaction-connection
@@ -156,7 +155,6 @@ Extras:
 - [x] Correção do tipo de transação: Campo value de Transaction agora é Float no schema GraphQL, garantindo consistência entre backend e frontend
 - [x] Refatoração de TransactionList: Aceita agora arrays readonly (alinhando com os tipos gerados pelo Relay)
 
-
 ### tag v1.13.0: feature/refactor-transaction-decimal
 - [x] Refatoração completa do tratamento de valores monetários para usar Decimal128 no backend, garantindo precisão em todas as operações 
 - [x] Alteração do campo value de Transaction para Float no schema GraphQL, alinhando backend e frontend e eliminando problemas de serialização
@@ -231,16 +229,21 @@ docker-compose up -d
 ### tag v1.21.0: feature/railway-frontend
 - [x] Subir ambiente final Railway frontend: https://woovi-web-frontend-production.up.railway.app/admin
 - [x] Criar arquivo `railway.toml` na pasta `apps/web` para configuração do Railway exclusivo Frontend
+
+### tag v1.22.0: feature/railway-toml
 - [x] Error: Cannot find module '../../lib/get-network-host'
+- [x] Configurar o variáveis de ambiente (NODE_ENV, PORT, NEXT_PUBLIC_API_URL) 
+- [x] Criar processo de build atualizado para os assets next.js
+- [x] Removido healthcheck do Railway que estava gerando conflitos
+- [x] Compatibilidade entre Dockerbuild e railway Nixpacks build
 
+### tag v1.23.0: feature/docs
+- [x] Atualizar a pasta `docs` com as os documentos construídos ao longo do desenvolvimento do projeto
+- [x] Adicionar as releases no github 
 
 ---
 
-## In Progress
-- [ ] Adicionar as releases no github 
-
----
-
+# Checklist
 ## Requisitos básicos do desafio (Core)
 
 - [x] Implementar **Transação entre duas contas**:
@@ -260,3 +263,10 @@ docker-compose up -d
 - [x] Arquivo `.graphql` ou `.http` com queries de exemplo
 - [x] Paginação real com `after`, `cursor` funcional para Accounts e Transactions
 - [x] Dockerfile + docker-compose.yml para ambiente local
+
+## Workflow:
+![Workflow](docs/workflow.jpeg)
+
+## Railway:
+![RailwayFrontend](https://woovi-playground-app.up.railway.app/admin)
+![RailwayBackend](https://woovi-playground-server.up.railway.app/graphql)

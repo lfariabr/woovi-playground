@@ -1,11 +1,5 @@
 # Useful Commands & Environments for Woovi Playground
 
-## What is pnpm?
-**pnpm** is a fast, disk space-efficient package manager for JavaScript, similar to npm or yarn. It manages dependencies and scripts for Node.js projects. You use it just like npm, but with improved performance and workspace support.
-- Official site: https://pnpm.io/
-
----
-
 ## Environments & Services Needed
 To run Woovi Playground locally, you need:
 - Node.js (JavaScript runtime)
